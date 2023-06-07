@@ -77,7 +77,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         incomeRange: reminderdropvalue,
         picfile: image!);
     if (res == "Success") {
-      Navigator.pop(context);
+      Get.back();
     } else {
       showSnackBar(text: res.toString(), color: Colors.red);
     }
@@ -100,26 +100,24 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.keyboard_arrow_left,
-                                color: Theme.of(context).focusColor, size: 38)),
-                        SizedBox(
-                          width: width! * 10,
-                        ),
-                        Text(
-                          "Update Acounts",
-                          style: kJakartaBodyBold.copyWith(
-                              fontSize: height! * 3.2),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.keyboard_arrow_left,
+                              color: Theme.of(context).focusColor, size: 38)),
+                      SizedBox(
+                        width: width! * 10,
+                      ),
+                      Text(
+                        "Update Acounts",
+                        style: kJakartaBodyBold.copyWith(
+                            fontSize: height! * 3.2),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: height * 1,
@@ -232,7 +230,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                         //dropedown
                         CustomeInputWithdrop(
                             perfix: Icons.currency_rupee,
-                            hintText: "$reminderdropvalue",
+                            hintText: reminderdropvalue,
                             // suffixIcon: Icons.keyboard_arrow_down,
                             suffix: DropdownButton<String>(
                               elevation: 10,

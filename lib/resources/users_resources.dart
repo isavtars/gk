@@ -31,7 +31,7 @@ class UserMethods {
           age.isNotEmpty ||
           kyc.isNotEmpty ||
           incomeRange.isNotEmpty ||
-          picfile!=null
+          picfile.isNotEmpty    
           ) {
         await _firestore.collection('users').doc(uid).update({
           'fullName': fullName,
