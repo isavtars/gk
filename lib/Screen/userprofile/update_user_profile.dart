@@ -77,7 +77,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         incomeRange: reminderdropvalue,
         picfile: image!);
     if (res == "Success") {
-      Navigator.pop(context);
+      Get.back();
     } else {
       showSnackBar(
         context,
