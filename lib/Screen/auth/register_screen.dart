@@ -45,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       debugPrint(res);
 
       if (res != "Succes") {
-        showSnackBar(text: res, color: Colors.red);
+        showSnackBar(context, text: res, color: Colors.red);
       } else {
         _formkey.currentState!.reset();
         // ignore: use_build_context_synchronously

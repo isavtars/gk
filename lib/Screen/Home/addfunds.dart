@@ -1,10 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gharkhracha/Screen/widgets/snackbar.dart';
 
 import '../../styles/color.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/text_btn.dart';
 
 class AddFundsScreen extends StatefulWidget {
   const AddFundsScreen({super.key});
@@ -21,10 +24,57 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
   final savingsController = TextEditingController();
 
   final user = FirebaseAuth.instance.currentUser!;
-  @override
-  void initState() {
-    debugPrint('your uid id ${user.uid}');
-    super.initState();
+  //add logics
+
+  String? checkValid(value) {
+    if (value.isEmpty || value == null) {
+      return 'Enter amount first';
+    }
+    return null;
+  }
+
+  void add() async {
+    if (_formKey.currentState!.validate()) {
+      double? totalAmount = double.tryParse(amountController.text);
+      double? amount = double.tryParse(amountController.text);
+      double? need = double.tryParse(needController.text) ?? 50.0;
+      double? expenses = double.tryParse(expensesController.text) ?? 30.0;
+      double? savings = double.tryParse(savingsController.text) ?? 20.0;
+
+      if (amount == null) {
+        return showSnackBar(context,
+          text: "Please enter the amount", color: Colors.red);
+      }
+
+      if ((need + expenses + savings) == 100.0) {
+        // Calculate amounts based on the split percentages or taking default percentages
+        double needPercent = (need >= 0) ? need / 100.0 : 0.5;
+        double expensesPercent = (expenses >= 0) ? expenses / 100.0 : 0.3;
+        double savingsPercent = (savings >= 0) ? savings / 100.0 : 0.2;
+
+        double needAmount = amount * needPercent;
+        double expensesAmount = amount * expensesPercent;
+        double savingsAmount = amount * savingsPercent;
+
+        final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+        final FirebaseAuth _auth = FirebaseAuth.instance;
+
+        _firestore.collection("usersdata").doc(_auth.currentUser!.uid).update({
+          'amount': FieldValue.increment(amount),
+          'need': FieldValue.increment(needAmount),
+          'expenses': FieldValue.increment(expensesAmount),
+          'savings': FieldValue.increment(savingsAmount),
+          'totalBalance': totalAmount,
+          'needAvailableBalance': FieldValue.increment(needAmount),
+          'expensesAvailableBalance': FieldValue.increment(expensesAmount),
+        }).then((value) {});
+      } else {
+        showSnackBar(
+         context,
+            text: 'Enter valid split values\n50%+30%+10% = 100%',
+            color: Colors.red);
+      }
+    }
   }
 
   @override
@@ -86,6 +136,7 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
                               hintText: "Amount",
                               icons: Icons.currency_rupee_outlined,
                               textinputTypes: TextInputType.number,
+                              validators: checkValid,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly
                               ]),
@@ -145,7 +196,9 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
                               constraints: constraints,
                               btnColor: Theme.of(context).primaryColor,
                               btnText: 'Add',
-                              onPressed: () async {}),
+                              onPressed: () async {
+                                add();
+                              }),
                           SizedBox(
                               height: orientation == Orientation.portrait
                                   ? constraints.maxHeight * 0.04

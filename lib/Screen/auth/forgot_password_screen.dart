@@ -40,13 +40,13 @@ class _ForgetScreenState extends State<ForgotPassScreen> {
         .then((value) {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (context) => const CheckMailScreen()));
-      showSnackBar(text: "Password reset email sent!", color: Colors.green);
+      showSnackBar(context,
+          text: "Password reset email sent!", color: Colors.green);
       setState(() {
         isLoading = false;
       });
     }).onError((err, stackTrace) {
-      showSnackBar
-      (text: err.toString(), color: Colors.red);
+      showSnackBar(context, text: err.toString(), color: Colors.red);
       setState(() {
         isLoading = false;
       });

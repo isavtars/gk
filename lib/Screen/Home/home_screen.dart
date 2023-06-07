@@ -40,157 +40,9 @@ class HomeScreen extends StatelessWidget {
                             height: constraints.maxHeight * 0.02,
                           ),
                           //blancecards
-                          Stack(
-                            children: [
-                              Container(
-                                height: orientation == Orientation.portrait
-                                    ? constraints.maxHeight * 0.3
-                                    : constraints.maxHeight * 0.6,
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(20))),
-                              ),
-                              Positioned(
-                                  left: 30,
-                                  top: 40,
-                                  child: Text(
-                                    'Total Balance',
-                                    style: kJakartaBodyMedium.copyWith(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: constraints.maxHeight * 0.035,
-                                        color: Colors.white),
-                                  )),
-                              Positioned(
-                                  left: 20,
-                                  top: 75,
-                                  child: Icon(
-                                    Icons.currency_rupee,
-                                    color: Colors.white,
-                                    size: constraints.maxHeight * 0.055,
-                                  )),
-                              Positioned(
-                                  left: 60,
-                                  top: 70,
-                                  child: SizedBox(
-                                    height: 60,
-                                    child: Text(
-                                      'Rs 90,000',
-                                      style: kJakartaBodyMedium.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize:
-                                              constraints.maxHeight * 0.05,
-                                          color: Colors.white),
-                                    ),
-                                  )),
-                              Positioned(
-                                  bottom: 15,
-                                  left: 30,
-                                  child: Container(
-                                    height: orientation == Orientation.portrait
-                                        ? constraints.maxHeight * 0.05
-                                        : constraints.maxHeight * 0.1,
-                                    width: orientation == Orientation.portrait
-                                        ? constraints.maxWidth * 0.34
-                                        : constraints.maxWidth * 0.4,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(25),
-                                      ),
-                                      color: GkThemsData.isDarkMode(context) ==
-                                              true
-                                          ? kDarkGreenBackC
-                                          : kGreenDarkC,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4, horizontal: 8),
-                                      child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Icon(
-                                              Icons.account_balance,
-                                              size: 19,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              "2120001452",
-                                              style: kJakartaBodyBold.copyWith(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 13),
-                                            )
-                                          ]),
-                                    ),
-                                  )),
-                              Positioned(
-                                bottom: 15,
-                                right: 20,
-                                child: Text(
-                                  appsname,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.white.withOpacity(0.5),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                  right: 22,
-                                  top: 20,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const AddFundsScreen()));
-                                    },
-                                    child: Container(
-                                      height:
-                                          orientation == Orientation.portrait
-                                              ? constraints.maxHeight * 0.07
-                                              : constraints.maxHeight * 0.2,
-                                      width: orientation == Orientation.portrait
-                                          ? constraints.maxWidth * 0.36
-                                          : constraints.maxWidth * 0.2,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            GkThemsData.isDarkMode(context) ==
-                                                    true
-                                                ? kDarkGreenBackC
-                                                : kGreenDarkC,
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(25),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          children: [
-                                            const Expanded(
-                                              child: Icon(
-                                                Icons.add,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                            Text(
-                                              "Add  funds",
-                                              style:
-                                                  kJakartaBodyRegular.copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 13),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ))
-                            ],
+                          Blancecard(
+                            orientation: orientation,
+                            constraints: constraints,
                           ),
                           SizedBox(
                             height: constraints.maxHeight * 0.02,
@@ -198,7 +50,9 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             'Category Balance',
                             style: kJakartaBodyBold.copyWith(
-                                fontSize: 23, fontWeight: FontWeight.w200),
+                                fontSize: constraints.maxWidth * 0.05,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w200),
                           ),
                           SizedBox(
                             height: constraints.maxHeight * 0.02,
@@ -267,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                                     return formatted;
                                   }
 
-                                  return ProductsCards(
+                                  return AmountsCards(
                                     transCard: TransCard.transCard[index],
                                     dateTime: formatDate(
                                         TransCard.transCard[index].dateTime),
@@ -286,8 +140,166 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ProductsCards extends StatelessWidget {
-  const ProductsCards(
+class Blancecard extends StatelessWidget {
+  const Blancecard({
+    super.key,
+    required this.orientation,
+    required this.constraints,
+  });
+
+  final Orientation orientation;
+  final BoxConstraints constraints;
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          width: constraints.maxWidth,
+          height: orientation == Orientation.portrait
+              ? constraints.maxHeight * 0.25
+              : constraints.maxHeight * 0.6,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+        ),
+        Positioned(
+          top: constraints.maxHeight * 0.05,
+          left: constraints.maxWidth * 0.07,
+          child: Text(
+            'Total Balance',
+            style: TextStyle(
+                fontSize: constraints.maxWidth * 0.06,
+                color: Colors.white,
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+        Positioned(
+          top: constraints.maxHeight * 0.1,
+          left: constraints.maxWidth * 0.05,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.currency_rupee,
+                size: constraints.maxWidth * 0.08,
+                color: Colors.white,
+              ),
+              Text(
+                "80,1000",
+                style: TextStyle(
+                    fontSize: constraints.maxWidth * 0.08,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          left: 30,
+          bottom: 15,
+          child: Container(
+            height: orientation == Orientation.portrait
+                ? constraints.maxHeight * 0.05
+                : constraints.maxHeight * 0.1,
+            width: orientation == Orientation.portrait
+                ? constraints.maxWidth * 0.34
+                : constraints.maxWidth * 0.18,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(25),
+              ),
+              color: GkThemsData.isDarkMode(context) == true
+                  ? kDarkGreenBackC
+                  : kGreenDarkC,
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.02,
+                  vertical: constraints.maxHeight * 0.01),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(
+                    Icons.account_balance,
+                    color: Colors.white,
+                    size: constraints.maxWidth * 0.05,
+                  ),
+                  Text(
+                    "220222",
+                    style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.05,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 15,
+          right: 20,
+          child: Text(
+            'GharKharcha',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: constraints.maxWidth * 0.05,
+              color: Colors.white.withOpacity(0.5),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 20,
+          right: 20,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddFundsScreen()));
+            },
+            child: Container(
+              height: constraints.maxHeight * 0.06,
+              width: constraints.maxWidth * 0.4,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25),
+                ),
+                color: GkThemsData.isDarkMode(context) == true
+                    ? kDarkGreenBackC
+                    : kGreenDarkC,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: constraints.maxWidth * 0.05,
+                  ),
+                  Text(
+                    'Add Funds',
+                    style: TextStyle(
+                        fontSize: constraints.maxWidth * 0.048,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AmountsCards extends StatelessWidget {
+  const AmountsCards(
       {super.key, required this.transCard, required this.dateTime});
 
   final TransCard transCard;

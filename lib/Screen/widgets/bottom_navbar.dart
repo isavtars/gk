@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../logic/user_controller.dart';
 import '../Home/home_screen.dart';
 import '../auth/login.dart';
+import '../userprofile/user_profile.dart';
 import 'demo_screen.dart';
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
@@ -37,7 +38,7 @@ class _BottomNavState extends State<BottomNav> {
       HomeScreen(),
       WalletScreen(),
       PlanningScreeen(),
-      UserProfileScreeen(),
+      UserProfile(),
     ];
   }
 

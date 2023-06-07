@@ -12,6 +12,9 @@ class GkThemsData {
         bodyMedium: TextStyle(color: kFontBlackC),
         bodySmall: TextStyle(color: kFontBlackC)),
     scaffoldBackgroundColor: Colors.white,
+    iconTheme: const IconThemeData(
+      color: Colors.black,
+    ),
     primaryColor: kGreenColor,
     colorScheme: const ColorScheme.light(),
     cardColor: kCardColor,
@@ -39,6 +42,9 @@ class GkThemsData {
       colorScheme: const ColorScheme.dark(),
       cardColor: kDarkCardC,
       primaryColor: kDarkGreenColor,
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
       inputDecorationTheme: InputDecorationTheme(
           hoverColor: kDarkGreenColor,
           focusColor: kDarkGreenColor,

@@ -38,9 +38,9 @@ class _VerifeidEmailScreenState extends State<VerifeidEmailScreen> {
   Future sendVerificationEmail() async {
     final user = FirebaseAuth.instance.currentUser!;
     await user.sendEmailVerification().then((value) {
-      showSnackBar(text: "Success", color: Colors.green);
+      showSnackBar(context, text: "Success", color: Colors.green);
     }).onError((error, stackTrace) {
-      showSnackBar(text: "Error", color: Colors.red);
+      showSnackBar(context, text: "Error", color: Colors.red);
     });
   }
 
@@ -57,9 +57,9 @@ class _VerifeidEmailScreenState extends State<VerifeidEmailScreen> {
           verified: FirebaseAuth.instance.currentUser!.emailVerified,
           uid: user.uid);
       if (res == "Success") {
-        showSnackBar(text: res.toString(), color: Colors.green);
+        showSnackBar(context, text: res.toString(), color: Colors.green);
       } else {
-        showSnackBar(text: res.toString(), color: Colors.red);
+        showSnackBar(context, text: res.toString(), color: Colors.red);
       }
     }
   }
