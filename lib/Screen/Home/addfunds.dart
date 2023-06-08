@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gharkhracha/Screen/widgets/snackbar.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../styles/color.dart';
 import '../widgets/custom_buttons.dart';
@@ -29,6 +30,8 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
   String? checkValid(value) {
     if (value.isEmpty || value == null) {
       return 'Enter amount first';
+    } else if (value == "-") {
+      return 'Enter amount first -';
     }
     return null;
   }
@@ -43,7 +46,7 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
 
       if (amount == null) {
         return showSnackBar(context,
-          text: "Please enter the amount", color: Colors.red);
+            text: "Please enter the amount", color: Colors.red);
       }
 
       if ((need + expenses + savings) == 100.0) {
@@ -67,10 +70,55 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
           'totalBalance': totalAmount,
           'needAvailableBalance': FieldValue.increment(needAmount),
           'expensesAvailableBalance': FieldValue.increment(expensesAmount),
-        }).then((value) {});
+        }).then((value) async {
+          DocumentSnapshot mapsplitdat = await _firestore
+              .collection('usersdata')
+              .doc(_auth.currentUser!.uid)
+              .get();
+
+          var map = mapsplitdat.data() as Map<String, dynamic>;
+
+          bool isEFenabled = map['isEFenabled'];
+
+          //if emergency funds is enableds
+          if (isEFenabled) {
+            var expenses = map['expenses'];
+            var count = map['count'];
+            var expensesMultiplier = map['expensesMultiplier'];
+            dynamic targetEmergencyFunds =
+                ((expenses / count) * expensesMultiplier);
+
+            final payerAlt = {
+              'count': FieldValue.increment(1),
+              'targetEmergencyFunds': targetEmergencyFunds,
+            };
+            _firestore
+                .collection("usersdata")
+                .doc(_auth.currentUser!.uid)
+                .update(payerAlt);
+          }
+
+          String transationsId = const Uuid().v1();
+
+          final payer = {
+            'name': 'Funds added!',
+            'amount': '+ ${amountController.text}',
+            'paymentDateTime': DateTime.now().toIso8601String(),
+            'count': FieldValue.increment(1),
+          };
+
+          _firestore
+              .collection("usersdata")
+              .doc(_auth.currentUser!.uid)
+              .collection("alltransations")
+              .doc(transationsId)
+              .set(payer);
+        });
+        showSnackBar(context, text: 'Added!', color: Colors.green);
+
+        Navigator.of(context).pop();
       } else {
-        showSnackBar(
-         context,
+        showSnackBar(context,
             text: 'Enter valid split values\n50%+30%+10% = 100%',
             color: Colors.red);
       }

@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.18.1
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.0.18
+  uuid: ^3.0.7
 
 
 dev_dependencies:

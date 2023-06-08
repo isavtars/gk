@@ -36,7 +36,6 @@ class Users {
       };
 
   //retrive the date to the models
-
   static Users fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
     return Users(
