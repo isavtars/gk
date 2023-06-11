@@ -20,12 +20,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    //unused variable
+    // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
         body: StreamBuilder(
-            stream: _firestore.collection('usersdata').snapshots(),
+            stream: firestore.collection('usersdata').snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return LayoutBuilder(
@@ -83,13 +85,16 @@ class HomeScreen extends StatelessWidget {
                                     SizedBox(
                                       height: constraints.maxHeight * 0.03,
                                     ),
-                                    Text(
-                                      "timro tauko",
-                                      style: kJakartaHeading1.copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 32),
-                                    ),
+                                    
+                                    //Pachak what is this timro tauko 😂😂
+
+                                    // Text(
+                                    //   "timro tauko",
+                                    //   style: kJakartaHeading1.copyWith(
+                                    //       color: Theme.of(context).primaryColor,
+                                    //       fontWeight: FontWeight.w600,
+                                    //       fontSize: 32),
+                                    // ),
                                     SizedBox(
                                       height: constraints.maxHeight * 0.02,
                                     ),

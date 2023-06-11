@@ -11,7 +11,7 @@ class UserMethods {
   // final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> updateUserDate(
+  Future<String> updateUserData(
       {required String uid,
       required String fullName,
       required String phoneNumber,
@@ -20,7 +20,7 @@ class UserMethods {
       required String kyc,
       required String incomeRange,
       required Uint8List picfile}) async {
-    String res = "Something is errors";
+    String res = "Something went wrong.";
 
     String profilePic =
         await StorageMehods().uplodaImages('profilePicture', picfile);
@@ -45,7 +45,7 @@ class UserMethods {
         });
         res = "Success";
       } else {
-        res = "Please Enter the all Feilds";
+        res = "Please enter all fields";
       }
     } catch (err) {
       res = err.toString();

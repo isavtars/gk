@@ -43,10 +43,10 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
       double? amount = double.tryParse(amountController.text);
       double? need = double.tryParse(needController.text) ?? 50.0;
       double? expenses = double.tryParse(expensesController.text) ?? 30.0;
-      double? savings = double.tryParse(savingsController.text) ?? 20.0;
+      double? savings = double.tryParse(savingsController.text) ?? 10.0;
 
       if (amount == null) {
-        return showSnackBar(context,
+         showSnackBar(context,
             text: "Please enter the amount", color: Colors.red);
       }
 
@@ -54,16 +54,16 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
         // Calculate amounts based on the split percentages or taking default percentages
         double needPercent = (need >= 0) ? need / 100.0 : 0.5;
         double expensesPercent = (expenses >= 0) ? expenses / 100.0 : 0.3;
-        double savingsPercent = (savings >= 0) ? savings / 100.0 : 0.2;
+        double savingsPercent = (savings >= 0) ? savings / 100.0 : 0.1;
 
-        double needAmount = amount * needPercent;
+        double needAmount = amount! * needPercent;
         double expensesAmount = amount * expensesPercent;
         double savingsAmount = amount * savingsPercent;
 
-        final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-        final FirebaseAuth _auth = FirebaseAuth.instance;
+        final FirebaseFirestore firestore = FirebaseFirestore.instance;
+        final FirebaseAuth auth = FirebaseAuth.instance;
 
-        _firestore.collection("usersdata").doc(_auth.currentUser!.uid).update({
+        firestore.collection("usersdata").doc(auth.currentUser!.uid).update({
           'amount': FieldValue.increment(amount),
           'need': FieldValue.increment(needAmount),
           'expenses': FieldValue.increment(expensesAmount),
@@ -72,9 +72,9 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
           'needAvailableBalance': FieldValue.increment(needAmount),
           'expensesAvailableBalance': FieldValue.increment(expensesAmount),
         }).then((value) async {
-          DocumentSnapshot mapsplitdat = await _firestore
+          DocumentSnapshot mapsplitdat = await firestore
               .collection('usersdata')
-              .doc(_auth.currentUser!.uid)
+              .doc(auth.currentUser!.uid)
               .get();
 
           var map = mapsplitdat.data() as Map<String, dynamic>;
@@ -93,9 +93,9 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
               'count': FieldValue.increment(1),
               'targetEmergencyFunds': targetEmergencyFunds,
             };
-            _firestore
+            firestore
                 .collection("usersdata")
-                .doc(_auth.currentUser!.uid)
+                .doc(auth.currentUser!.uid)
                 .update(payerAlt);
           }
 
@@ -108,14 +108,14 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
             'count': FieldValue.increment(1),
           };
 
-          _firestore
+          firestore
               .collection("usersdata")
-              .doc(_auth.currentUser!.uid)
+              .doc(auth.currentUser!.uid)
               .collection("alltransations")
               .doc(transationsId)
               .set(payer);
         });
-        showSnackBar(context, text: 'Added!', color: Colors.green);
+        showSnackBar(context, text: 'Yay! Funds added successfully!', color: Colors.green);
 
         Navigator.of(context).pop();
       } else {

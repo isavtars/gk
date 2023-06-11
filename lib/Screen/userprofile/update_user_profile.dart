@@ -62,11 +62,13 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
   }
 
   final user = Get.find<UserController>().getUsers!;
+
   updateUser() async {
     setState(() {
       isLoding = true;
     });
-    String res = await UserMethods().updateUserDate(
+
+    String res = await UserMethods().updateUserData(
         uid: user.uid,
         fullName: fullNameController.text.toString(),
         age: ageController.text.toString(),
@@ -75,10 +77,25 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         kyc: kycController.text.toString(),
         incomeRange: reminderdropvalue,
         picfile: image!);
+
     if (res == "Success") {
       Get.back();
     } else {
-      showSnackBar(context, text: res.toString(), color: Colors.red);
+      // Don't use 'BuildContext's across async gaps. Try rewriting the code
+      // showSnackBar(context, text: res.toString(), color: Colors.red);
+
+//Instead use this code to not reference the 'BuildContext'.
+
+      Future<void>.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(res.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+      });
+
+//By using Future<void>.delayed(Duration.zero, () {}), we create a minimal delay to allow the asynchronous gap to be bridged. The showSnackBar call is then executed within the callback function, which is executed asynchronously after a very short delay.
     }
 
     setState(() {
@@ -235,7 +252,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                           //dropedown
                           CustomeInputWithdrop(
                               perfix: Icons.currency_rupee,
-                              hintText: "$reminderdropvalue",
+                              hintText: reminderdropvalue,
                               // suffixIcon: Icons.keyboard_arrow_down,
                               suffix: DropdownButton<String>(
                                 elevation: 10,
@@ -297,9 +314,6 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
   }
 }
 
-
-
-
 //TODO FOR THIS SCREEN
-//1 VALIDATION BOTH SIDE 
+//1 VALIDATION BOTH SIDE
 //CHANGE CircularProgressIndicator() COLOR
