@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,14 +21,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    // final FirebaseAuth _auth = FirebaseAuth.instance;
 
     return Scaffold(
       body: StreamBuilder(
           stream: _firestore.collection('usersdata').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data.isUndefinedOrNull) {
+              if (snapshot.hasData) {
                 return LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     return Padding(
