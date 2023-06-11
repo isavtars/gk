@@ -7,7 +7,7 @@ import '../../styles/color.dart';
 import '../../styles/sizeconfig.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/snackbar.dart';
+// import '../widgets/snackbar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
 //login Screenn
 
-
   void login() async {
     if (_formGlobal.currentState!.validate()) {
       setState(() {
@@ -37,7 +36,16 @@ class _LoginScreenState extends State<LoginScreen> {
         email: emailController.text, password: passwordController.text);
 
     if (res != "Sucess") {
-      showSnackBar(context,text: res, color: Colors.red);
+      // showSnackBar(context,text: res, color: Colors.red);
+
+      Future<void>.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(res.toString()),
+            backgroundColor: Colors.green,
+          ),
+        );
+      });
     } else {
       _formGlobal.currentState!.reset();
     }
@@ -136,7 +144,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                          : const Text("LOGIN", style: TextStyle(fontWeight: FontWeight.bold),),
+                          : const Text(
+                              "LOGIN",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                       onPress: login,
                     ),
                     SizedBox(
@@ -168,4 +179,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

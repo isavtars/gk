@@ -6,7 +6,7 @@ import '../../styles/color.dart';
 import '../../styles/sizeconfig.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/snackbar.dart';
+// import '../widgets/snackbar.dart';
 import 'verefirdmail.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -44,7 +44,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       debugPrint(res);
 
       if (res != "Succes") {
-        showSnackBar(context, text: res, color: Colors.red);
+        // showSnackBar(context, text: res, color: Colors.red);
+
+        Future<void>.delayed(Duration.zero, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(res.toString()),
+              backgroundColor: Colors.green,
+            ),
+          );
+        });
       } else {
         _formkey.currentState!.reset();
         // ignore: use_build_context_synchronously

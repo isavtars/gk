@@ -12,7 +12,7 @@ import '../../styles/sizeconfig.dart';
 import '../../utils/utils.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/snackbar.dart';
+// import '../widgets/snackbar.dart';
 
 class UserProfileUpdate extends StatefulWidget {
   const UserProfileUpdate({super.key});
@@ -199,107 +199,105 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                     //TextInputFeild
 
                     Form(
-                        child: Container(
-                      child: Column(
-                        children: [
-                          CustomeInputs(
-                            textEditingController: fullNameController,
-                            hintText: "fullName",
-                            icons: Icons.account_box,
-                            textinputTypes: TextInputType.text,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //pn
-                          CustomeInputs(
-                            textEditingController: phoneNumberController,
-                            hintText: "PhoneNumber",
-                            icons: Icons.phone,
-                            textinputTypes: TextInputType.phone,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //bankacc
-                          CustomeInputs(
-                            textEditingController: bankAccountController,
-                            hintText: "BankAcoountNumber",
-                            icons: Icons.account_balance,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          CustomeInputs(
-                            textEditingController: kycController,
-                            hintText: "Kyc Number",
-                            icons: Icons.account_balance,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          CustomeInputs(
-                            textEditingController: ageController,
-                            hintText: "Age",
-                            icons: Icons.account_circle_outlined,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //dropedown
-                          CustomeInputWithdrop(
-                              perfix: Icons.currency_rupee,
-                              hintText: reminderdropvalue,
-                              // suffixIcon: Icons.keyboard_arrow_down,
-                              suffix: DropdownButton<String>(
-                                elevation: 10,
-                                iconSize: 32,
-                                style: kJakartaHeading4.copyWith(
-                                    color: kGrayTextfieldC, fontSize: 19),
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: kGrayTextfieldC,
-                                ),
-                                items: items.map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: kJakartaHeading3.copyWith(
-                                          fontSize: 19, color: kGrayTextfieldC),
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) {
-                                  // This is called when the user selects an item.
-                                  setState(() {
-                                    reminderdropvalue = value!;
-                                  });
-                                },
-                              )),
-
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-
-                          CustomeBtn(
-                            btnTitleName: isLoding
-                                ? const CircularProgressIndicator()
-                                : Text(
-                                    "Continue",
-                                    style: kJakartaHeading3.copyWith(
-                                        color: Colors.white,
-                                        fontSize: height * 2),
+                        child: Column(
+                          children: [
+                            CustomeInputs(
+                              textEditingController: fullNameController,
+                              hintText: "fullName",
+                              icons: Icons.account_box,
+                              textinputTypes: TextInputType.text,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //pn
+                            CustomeInputs(
+                              textEditingController: phoneNumberController,
+                              hintText: "PhoneNumber",
+                              icons: Icons.phone,
+                              textinputTypes: TextInputType.phone,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //bankacc
+                            CustomeInputs(
+                              textEditingController: bankAccountController,
+                              hintText: "BankAcoountNumber",
+                              icons: Icons.account_balance,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            CustomeInputs(
+                              textEditingController: kycController,
+                              hintText: "Kyc Number",
+                              icons: Icons.account_balance,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            CustomeInputs(
+                              textEditingController: ageController,
+                              hintText: "Age",
+                              icons: Icons.account_circle_outlined,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //dropedown
+                            CustomeInputWithdrop(
+                                perfix: Icons.currency_rupee,
+                                hintText: reminderdropvalue,
+                                // suffixIcon: Icons.keyboard_arrow_down,
+                                suffix: DropdownButton<String>(
+                                  elevation: 10,
+                                  iconSize: 32,
+                                  style: kJakartaHeading4.copyWith(
+                                      color: kGrayTextfieldC, fontSize: 19),
+                                  icon: const Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: kGrayTextfieldC,
                                   ),
-                            onPress: updateUser,
-                          ),
-                        ],
-                      ),
-                    )),
+                                  items: items.map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: kJakartaHeading3.copyWith(
+                                            fontSize: 19, color: kGrayTextfieldC),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    // This is called when the user selects an item.
+                                    setState(() {
+                                      reminderdropvalue = value!;
+                                    });
+                                  },
+                                )),
+
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+
+                            CustomeBtn(
+                              btnTitleName: isLoding
+                                  ? const CircularProgressIndicator()
+                                  : Text(
+                                      "Continue",
+                                      style: kJakartaHeading3.copyWith(
+                                          color: Colors.white,
+                                          fontSize: height * 2),
+                                    ),
+                              onPress: updateUser,
+                            ),
+                          ],
+                        )),
                     SizedBox(
                       height: height * 5,
                     ),

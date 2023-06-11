@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../resources/auth_resources.dart';
 import '../userprofile/update_user_profile.dart';
 
@@ -23,8 +22,6 @@ class _VerifeidEmailScreenState extends State<VerifeidEmailScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-
     isVerifiedEmail = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (isVerifiedEmail == false) {
@@ -58,9 +55,27 @@ class _VerifeidEmailScreenState extends State<VerifeidEmailScreen> {
           verified: FirebaseAuth.instance.currentUser!.emailVerified,
           uid: user.uid);
       if (res == "Success") {
-        showSnackBar(context, text: res.toString(), color: Colors.green);
+        // showSnackBar(context, text: res.toString(), color: Colors.green);
+
+        Future<void>.delayed(Duration.zero, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(res.toString()),
+              backgroundColor: Colors.green,
+            ),
+          );
+        });
       } else {
-        showSnackBar(context, text: res.toString(), color: Colors.red);
+        // showSnackBar(context, text: res.toString(), color: Colors.red);
+
+        Future<void>.delayed(Duration.zero, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(res.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        });
       }
     }
   }
