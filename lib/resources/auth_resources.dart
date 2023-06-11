@@ -10,7 +10,7 @@ class AuthMethods {
   //this is our methods
   Future<String> signUpUser(
       {required email, required password, required confirmPassword}) async {
-    String res = "Something errors occures";
+    String res = "Something went wrong. Please try again.";
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
@@ -36,8 +36,10 @@ class AuthMethods {
             .set(user.toJson());
 
         res = "Succes";
+      } else if (password != confirmPassword) {
+        res = "Passwords does not match";
       } else {
-        res = "Please Enter The all Feilds";
+        res = "Please enter all fields to proceed.";
       }
     } catch (err) {
       res = err.toString();
@@ -50,7 +52,7 @@ class AuthMethods {
 
   Future<String> loginUsers(
       {required String email, required String password}) async {
-    String res = 'Something Errors Occures';
+    String res = 'Something went wrong. Please try again.';
 
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
@@ -58,7 +60,7 @@ class AuthMethods {
             email: email, password: password);
         res = "Sucess";
       } else {
-        res = "Enter all the feilds";
+        res = "Please enter your username and password to proceed.";
       }
     } catch (err) {
       res = err.toString();
@@ -69,7 +71,7 @@ class AuthMethods {
 
   //resetspasword
   Future<String> resetPassword({required String email}) async {
-    String res = "Somrthing errors occures";
+    String res = "Somrthing went wrong";
     try {
       await _auth.sendPasswordResetEmail(email: email);
       res = "Sucess";
@@ -105,7 +107,7 @@ class AuthMethods {
 
   Future<String> verifierdEmail(
       {required bool verified, required String uid}) async {
-    String res = "Something Errors occure";
+    String res = "Something went wrong";
     try {
       if (verified) {
         await _firestore.collection('usersdata').doc(uid).set({

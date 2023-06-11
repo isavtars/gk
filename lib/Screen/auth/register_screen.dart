@@ -50,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(res.toString()),
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.red,
             ),
           );
         });
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             credentials: false,
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The email";
+                                return "Email is required to proceed";
                               }
                               return null;
                             },
@@ -153,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomeInputs(
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The password";
+                                return "You left the password field blank";
                               }
                               return null;
                             },
@@ -169,9 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomeInputs(
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The confirmpassword";
+                                return "Re-enter the password to confirm";
                               } else if (value != passwordController.text) {
-                                return "Enter password And confirmpassword shouldbe same ";
+                                return "Seems like passwords does not matched";
                               }
                               return null;
                             },
