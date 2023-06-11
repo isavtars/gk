@@ -109,12 +109,12 @@ class _ForgetScreenState extends State<ForgotPassScreen> {
                       key: _formKey,
                       child: CustomeInputs(
                         textEditingController: emailController,
-                        hintText: "Emaill",
+                        hintText: "Email",
                         icons: Icons.alternate_email,
                         textinputTypes: TextInputType.emailAddress,
                         validators: (value) {
                           if (value!.isEmpty) {
-                            return "Enater The email";
+                            return "Enter the email";
                           }
                           return null;
                         },

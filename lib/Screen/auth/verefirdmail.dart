@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gk/logic/user_controller.dart';
 
 import '../../resources/auth_resources.dart';
 import '../userprofile/update_user_profile.dart';
@@ -77,6 +79,7 @@ class _VerifeidEmailScreenState extends State<VerifeidEmailScreen> {
           );
         });
       }
+      Get.lazyPut(() => UserController());
     }
   }
 

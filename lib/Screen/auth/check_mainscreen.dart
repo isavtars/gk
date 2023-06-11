@@ -1,8 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:gk/Screen/auth/login.dart';
+import 'package:gk/styles/color.dart';
 
 class CheckMailScreen extends StatelessWidget {
   const CheckMailScreen({super.key});
+
+  void login() {
+    Get.to(const LoginScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +34,21 @@ class CheckMailScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton.icon(
+              onPressed: login,
+              icon: const Icon(Icons.arrow_forward),
+              label: const Padding(
+                padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+                child: Text('Proceed to LOGIN', style: TextStyle(color: kGreenColor, fontWeight: FontWeight.bold),),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))
+              ),
+            ),
+          )
+          // TextButton(onPressed: login, child: const Text('Proceed to LOGIN', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),))
         ],
       )),
     );

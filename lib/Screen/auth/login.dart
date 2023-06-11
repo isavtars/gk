@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gk/logic/user_controller.dart';
 
 import '../../resources/auth_resources.dart';
 import '../../styles/color.dart';
@@ -42,12 +43,13 @@ class _LoginScreenState extends State<LoginScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(res.toString()),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
           ),
         );
       });
     } else {
       _formGlobal.currentState!.reset();
+     
     }
     setState(() {
       _isLoading = false;
