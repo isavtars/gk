@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gharkhracha/Screen/widgets/snackbar.dart';
+
 import 'package:uuid/uuid.dart';
 
 import '../../styles/color.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
+import '../widgets/snackbar.dart';
 
 class AddFundsScreen extends StatefulWidget {
   const AddFundsScreen({super.key});

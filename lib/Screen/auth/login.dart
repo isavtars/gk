@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gharkhracha/Screen/widgets/custom_buttons.dart';
-import 'package:gharkhracha/resources/auth_resources.dart';
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
 
+import '../../resources/auth_resources.dart';
+import '../../styles/color.dart';
+import '../../styles/sizeconfig.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
 import '../widgets/snackbar.dart';
 
@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
 //login Screenn
+
 
   void login() async {
     if (_formGlobal.currentState!.validate()) {
@@ -167,3 +168,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+

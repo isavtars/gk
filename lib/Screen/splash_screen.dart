@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:gharkhracha/styles/color.dart';
 
+
+import '../styles/color.dart';
 import 'widgets/bottom_navbar.dart';
 
 class SplashScreen extends StatelessWidget {

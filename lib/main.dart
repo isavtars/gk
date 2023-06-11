@@ -2,16 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gharkhracha/Screen/auth/login.dart';
-import 'package:gharkhracha/Screen/auth/register_screen.dart';
-import 'package:gharkhracha/Screen/splash_screen.dart';
-
-import 'package:gharkhracha/logic/bainding/my_bainding.dart';
 
 import 'Screen/Home/home_screen.dart';
 import 'Screen/auth/forgot_password_screen.dart';
+import 'Screen/auth/login.dart';
+import 'Screen/auth/register_screen.dart';
+import 'Screen/splash_screen.dart';
 import 'Screen/widgets/bottom_navbar.dart';
 import 'firebase_options.dart';
+import 'logic/bainding/my_bainding.dart';
 import 'logic/themes_changer.dart';
 import 'styles/gharkharcha_themes.dart';
 

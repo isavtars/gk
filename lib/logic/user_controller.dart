@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
-import 'package:gharkhracha/resources/auth_resources.dart';
+
 
 import '../model/user_models.dart';
+import '../resources/auth_resources.dart';
 //Users from Users models
 
 class UserController extends GetxController {

@@ -3,7 +3,8 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gharkhracha/resources/storage_methods.dart';
+import 'package:gk/resources/storage_methods.dart';
+
 
 
 class UserMethods {

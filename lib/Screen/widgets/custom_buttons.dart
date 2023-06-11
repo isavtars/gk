@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
+import 'package:gk/styles/sizeconfig.dart';
 
 import '../../styles/color.dart';
 

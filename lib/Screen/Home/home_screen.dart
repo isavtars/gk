@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/gharkharcha_themes.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../styles/color.dart';
+import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_cards.dart';
@@ -21,14 +21,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    // final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
 
     return Scaffold(
-      body: StreamBuilder(
-          stream: _firestore.collection('usersdata').snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.hasData) {
+        body: StreamBuilder(
+            stream: _firestore.collection('usersdata').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
                 return LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     return Padding(
@@ -64,10 +63,10 @@ class HomeScreen extends StatelessWidget {
                   },
                 );
               } else {
-                DocumentSnapshot mapdata = snapshot.data!.docs[0];
+                // DocumentSnapshot mapdata = snapshot.data!.docs[0];
 
-                var map = mapdata as Map<String, dynamic>;
-                bool isEFenabled = map['isEFenabled'];
+                // var map = mapdata as Map<String, dynamic>;
+                // bool isEFenabled = map['isEFenabled'];
                 return SafeArea(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
@@ -85,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                                       height: constraints.maxHeight * 0.03,
                                     ),
                                     Text(
-                                      isEFenabled.toString(),
+                                      "timro tauko",
                                       style: kJakartaHeading1.copyWith(
                                           color: Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w600,
@@ -204,24 +203,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               }
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
-              );
-            } else {
-              const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
-            );
-          }),
-    );
+            }));
   }
 }
 

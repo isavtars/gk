@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gharkhracha/Screen/widgets/snackbar.dart';
-import 'package:gharkhracha/resources/auth_resources.dart';
 
+
+import '../../resources/auth_resources.dart';
 import '../userprofile/update_user_profile.dart';
 
 import '../widgets/checkedemal.dart';
+import '../widgets/snackbar.dart';
 
 class VerifeidEmailScreen extends StatefulWidget {
   const VerifeidEmailScreen({super.key});

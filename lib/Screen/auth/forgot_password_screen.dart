@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:gharkhracha/Screen/widgets/custom_buttons.dart';
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
 
+import '../../styles/color.dart';
+import '../../styles/sizeconfig.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
 import '../widgets/snackbar.dart';
 import 'check_mainscreen.dart';

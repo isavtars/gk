@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gharkhracha/Screen/auth/verefirdmail.dart';
 
-import 'package:gharkhracha/Screen/widgets/custom_buttons.dart';
-import 'package:gharkhracha/resources/auth_resources.dart';
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
-
+import '../../resources/auth_resources.dart';
+import '../../styles/color.dart';
+import '../../styles/sizeconfig.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
 import '../widgets/snackbar.dart';
+import 'verefirdmail.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

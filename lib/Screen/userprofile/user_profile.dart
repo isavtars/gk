@@ -2,12 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:gharkhracha/logic/user_controller.dart';
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
+
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../logic/themes_changer.dart';
+import '../../logic/user_controller.dart';
+import '../../styles/color.dart';
+import '../../styles/sizeconfig.dart';
 import '../auth/forgot_password_screen.dart';
 import '../auth/login.dart';
 import '../widgets/custom_buttons.dart';

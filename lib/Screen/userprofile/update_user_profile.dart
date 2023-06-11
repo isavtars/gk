@@ -3,17 +3,16 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:gharkhracha/Screen/widgets/custom_buttons.dart';
-import 'package:gharkhracha/Screen/widgets/snackbar.dart';
-import 'package:gharkhracha/logic/user_controller.dart';
-import 'package:gharkhracha/styles/color.dart';
-import 'package:gharkhracha/styles/sizeconfig.dart';
-
 import 'package:image_picker/image_picker.dart';
 
+import '../../logic/user_controller.dart';
 import '../../resources/users_resources.dart';
+import '../../styles/color.dart';
+import '../../styles/sizeconfig.dart';
 import '../../utils/utils.dart';
+import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
+import '../widgets/snackbar.dart';
 
 class UserProfileUpdate extends StatefulWidget {
   const UserProfileUpdate({super.key});
@@ -79,9 +78,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
     if (res == "Success") {
       Get.back();
     } else {
-      showSnackBar(
-        context,
-        text: res.toString(), color: Colors.red);
+      showSnackBar(context, text: res.toString(), color: Colors.red);
     }
 
     setState(() {

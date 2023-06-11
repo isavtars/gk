@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "476464166221",
-    "project_id": "ggkk-73880",
-    "storage_bucket": "ggkk-73880.appspot.com"
+    "project_number": "171892615630",
+    "project_id": "ghark-dfcbf",
+    "storage_bucket": "ghark-dfcbf.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:476464166221:android:9cda9193f3e21c5ef83304",
+        "mobilesdk_app_id": "1:171892615630:android:c6c122464badfb8d98239f",
         "android_client_info": {
           "package_name": "com.example.gk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "476464166221-27qbu0ogmp12391jik6eliahdm1r1rq0.apps.googleusercontent.com",
+          "client_id": "171892615630-6bgvrpaotq3tjh7i34ca4f62smavlekg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCeJAr1iVXSPaDEzRWA2dt0mpmygabfiQ8"
+          "current_key": "AIzaSyCkOCA6H9hxARCcBjEr12vPu7louRxLFkw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "476464166221-27qbu0ogmp12391jik6eliahdm1r1rq0.apps.googleusercontent.com",
+              "client_id": "171892615630-6bgvrpaotq3tjh7i34ca4f62smavlekg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

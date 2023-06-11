@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gharkhracha/styles/color.dart';
+import 'package:gk/styles/color.dart';
 
 showSnackBar(BuildContext context,
     {required String text, required Color color}) {
