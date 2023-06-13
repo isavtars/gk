@@ -40,7 +40,7 @@ class CustomCard extends StatelessWidget {
                 child: Text(
                   cardTitle,
                   style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 20,
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w500),
                 ),
@@ -51,6 +51,7 @@ class CustomCard extends StatelessWidget {
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Icon(
                       Icons.currency_rupee,
@@ -61,7 +62,7 @@ class CustomCard extends StatelessWidget {
                       child: Text(
                         cardBalance,
                         style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w500),
+                            fontSize: 22, fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],

@@ -242,7 +242,7 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
                           ),
                           SizedBox(height: constraints.maxHeight * 0.04),
                           TButton(
-                              constraints: constraints,
+                              // constraints: constraints,
                               btnColor: Theme.of(context).primaryColor,
                               btnText: 'Add',
                               onPressed: () async {
@@ -250,8 +250,8 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
                               }),
                           SizedBox(
                               height: orientation == Orientation.portrait
-                                  ? constraints.maxHeight * 0.04
-                                  : constraints.maxHeight * 0.08),
+                                  ? constraints.maxHeight * 0.1
+                                  : constraints.maxHeight * 0.1),
                         ],
                       ),
                     ),

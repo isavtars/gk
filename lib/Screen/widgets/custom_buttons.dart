@@ -31,12 +31,12 @@ class TButton extends StatelessWidget {
   const TButton(
       {super.key,
       this.loading = false,
-      required this.constraints,
+      this.constraints,
       required this.btnColor,
       required this.btnText,
       required this.onPressed});
 
-  final BoxConstraints constraints;
+  final BoxConstraints? constraints;
   final Color btnColor;
   final String btnText;
   final Function() onPressed;
@@ -45,8 +45,9 @@ class TButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: constraints.maxWidth,
-      height: constraints.maxHeight * 0.072,
+      width: double.maxFinite,
+      height: 53,
+      // height: constraints.maxHeight * 0.074,
       decoration: BoxDecoration(
         color: btnColor,
         borderRadius: const BorderRadius.all(Radius.circular(12)),

@@ -25,183 +25,263 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
         body: StreamBuilder(
-            stream: _firestore.collection('usersdata').snapshots(),
+            stream: _firestore
+                .collection('usersdata')
+                .doc(_auth.currentUser!.uid)
+                .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const NullErrorMessage(
-                            message:
-                                'Something went wrong!\n Make sure you have verified your mail',
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TButton(
-                            constraints: constraints,
-                            btnColor: Theme.of(context).primaryColor,
-                            btnText: 'Sign up again!',
-                            onPressed: () {
-                              FirebaseAuth.instance.currentUser!.delete();
-                              FirebaseAuth.instance.signOut;
-                              PersistentNavBarNavigator.pushNewScreen(
-                                context,
-                                screen: const LoginScreen(),
-                                withNavBar:
-                                    false, // OPTIONAL VALUE. True by default.
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              } else {
-                // DocumentSnapshot mapdata = snapshot.data!.docs[0];
+              if (snapshot.hasData) {
+                if (snapshot.data != null) {
+                  DocumentSnapshot<Map<String, dynamic>> map = snapshot.data!;
 
-                // var map = mapdata as Map<String, dynamic>;
-                // bool isEFenabled = map['isEFenabled'];
-                return SafeArea(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      return OrientationBuilder(
-                        builder:
-                            (BuildContext context, Orientation orientation) {
-                          return SingleChildScrollView(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.03,
-                                    ),
-                                    Text(
-                                      "timro tauko",
-                                      style: kJakartaHeading1.copyWith(
-                                          color: Theme.of(context).primaryColor,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 32),
-                                    ),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
-                                    //blancecards
-                                    Blancecard(
-                                      orientation: orientation,
-                                      constraints: constraints,
-                                    ),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
-                                    Text(
-                                      'Category Balance',
-                                      style: kJakartaBodyBold.copyWith(
-                                          fontSize: constraints.maxWidth * 0.05,
-                                          overflow: TextOverflow.ellipsis,
-                                          fontWeight: FontWeight.w200),
-                                    ),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
+                  dynamic total = map['needAvailableBalance'] +
+                      map['expensesAvailableBalance'] +
+                      map['savings'];
 
-                                    //fontcard
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          CustomCard(
-                                            verHeight:
-                                                constraints.maxHeight * 0.14,
-                                            horiHeight:
-                                                constraints.maxHeight * 0.35,
-                                            verWidth:
-                                                constraints.maxHeight * 0.2,
-                                            horiWidth:
-                                                constraints.maxWidth * 0.4,
-                                            orientation: orientation,
-                                            cardTitle: "Need",
-                                            cardBalance: "100,00",
-                                          ),
-                                          CustomCard(
-                                            verHeight:
-                                                constraints.maxHeight * 0.14,
-                                            horiHeight:
-                                                constraints.maxHeight * 0.35,
-                                            verWidth:
-                                                constraints.maxHeight * 0.2,
-                                            horiWidth:
-                                                constraints.maxWidth * 0.4,
-                                            orientation: orientation,
-                                            cardTitle: "Expenses",
-                                            cardBalance: "20,000",
-                                          )
-                                        ]),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
-                                    CustomCard(
-                                      verHeight: constraints.maxHeight * 0.14,
-                                      horiHeight: constraints.maxHeight * 0.35,
-                                      verWidth: constraints.maxHeight,
-                                      horiWidth: constraints.maxWidth,
-                                      orientation: orientation,
-                                      cardTitle: "Saving",
-                                      cardBalance: "80,000",
-                                    ),
+                  return SafeArea(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return OrientationBuilder(
+                          builder:
+                              (BuildContext context, Orientation orientation) {
+                            return SingleChildScrollView(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.03,
+                                      ),
+                                      Text(
+                                        "GharKharcha",
+                                        style: kJakartaHeading1.copyWith(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 32),
+                                      ),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
+                                      //blancecards
+                                      Blancecard(
+                                        orientation: orientation,
+                                        constraints: constraints,
+                                        total: total,
+                                      ),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
+                                      Text(
+                                        'Category Balance',
+                                        style: kJakartaBodyBold.copyWith(
+                                            fontSize:
+                                                constraints.maxWidth * 0.05,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontWeight: FontWeight.w200),
+                                      ),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
 
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
+                                      //fontcard
+                                      Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            CustomCard(
+                                              verHeight:
+                                                  constraints.maxHeight * 0.14,
+                                              horiHeight:
+                                                  constraints.maxHeight * 0.35,
+                                              verWidth:
+                                                  constraints.maxHeight * 0.2,
+                                              horiWidth:
+                                                  constraints.maxWidth * 0.4,
+                                              orientation: orientation,
+                                              cardTitle: "Need",
+                                              cardBalance:
+                                                  map['needAvailableBalance']
+                                                      .toStringAsFixed(0),
+                                            ),
+                                            CustomCard(
+                                              verHeight:
+                                                  constraints.maxHeight * 0.14,
+                                              horiHeight:
+                                                  constraints.maxHeight * 0.35,
+                                              verWidth:
+                                                  constraints.maxHeight * 0.2,
+                                              horiWidth:
+                                                  constraints.maxWidth * 0.4,
+                                              orientation: orientation,
+                                              cardTitle: "Expenses",
+                                              cardBalance:
+                                                  map['expensesAvailableBalance']
+                                                      .toStringAsFixed(0),
+                                            )
+                                          ]),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
+                                      CustomCard(
+                                        verHeight: constraints.maxHeight * 0.14,
+                                        horiHeight:
+                                            constraints.maxHeight * 0.35,
+                                        verWidth: constraints.maxHeight,
+                                        horiWidth: constraints.maxWidth,
+                                        orientation: orientation,
+                                        cardTitle: "savings",
+                                        cardBalance:
+                                            map['savings'].toStringAsFixed(0),
+                                      ),
 
-                                    Text(
-                                      "All Transations",
-                                      style: kJakartaBodyMedium.copyWith(
-                                          fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      height: constraints.maxHeight * 0.02,
-                                    ),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
 
-                                    SizedBox(
-                                      height: 300,
-                                      child: ListView.builder(
-                                          itemCount: TransCard.transCard.length,
-                                          itemBuilder: (context, index) {
-                                            dynamic formatDate(String date) {
-                                              final dynamic newDate =
-                                                  DateTime.parse(date);
-                                              final DateFormat formatter =
-                                                  DateFormat(
-                                                      'E, d MMMM,   hh:mm a');
-                                              final dynamic formatted =
-                                                  formatter.format(newDate);
-                                              return formatted;
+                                      Text(
+                                        "All Transations",
+                                        style: kJakartaBodyMedium.copyWith(
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(
+                                        height: constraints.maxHeight * 0.02,
+                                      ),
+
+                                      StreamBuilder(
+                                          stream: _firestore
+                                              .collection('alltransations')
+                                              .snapshots(),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.hasData) {
+                                              if (snapshot.data != null) {
+                                                QuerySnapshot<
+                                                        Map<String, dynamic>>
+                                                    querySnapshot =
+                                                    snapshot.data!;
+                                                List<
+                                                        QueryDocumentSnapshot<
+                                                            Map<String,
+                                                                dynamic>>>
+                                                    documents =
+                                                    querySnapshot.docs;
+
+                                                List<dynamic> list = documents
+                                                    .map((doc) => doc.data())
+                                                    .toList();
+                                                list.sort((a, b) => b[
+                                                        'paymentDateTime']
+                                                    .compareTo(
+                                                        a['paymentDateTime']));
+                                                SizedBox(
+                                                  height: 300,
+                                                  child: ListView.builder(
+                                                      itemCount: list.length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        dynamic formatDate(
+                                                            String date) {
+                                                          final dynamic
+                                                              newDate =
+                                                              DateTime.parse(
+                                                                  date);
+                                                          final DateFormat
+                                                              formatter =
+                                                              DateFormat(
+                                                                  'E, d MMMM,   hh:mm a');
+                                                          final dynamic
+                                                              formatted =
+                                                              formatter.format(
+                                                                  newDate);
+                                                          return formatted;
+                                                        }
+
+                                                        return AmountsCards(
+                                                          transCard: TransCard
+                                                              .transCard[index],
+                                                          dateTime: formatDate(
+                                                              TransCard
+                                                                  .transCard[
+                                                                      index]
+                                                                  .dateTime),
+                                                        );
+                                                      }),
+                                                );
+                                              } else {
+                                                const Center(
+                                                  child: Text(
+                                                      "Trnsation has not done"),
+                                                );
+                                              }
+                                            } else {
+                                              return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                color: kDefaultIconLightColor,
+                                              ));
                                             }
 
-                                            return AmountsCards(
-                                              transCard:
-                                                  TransCard.transCard[index],
-                                              dateTime: formatDate(TransCard
-                                                  .transCard[index].dateTime),
-                                            );
+                                            return const Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                              color: kDefaultIconLightColor,
+                                            ));
                                           }),
-                                    )
-                                  ]),
+
+                                      // transations
+                                    ]),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  );
+                } else {
+                  return LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const NullErrorMessage(
+                              message:
+                                  'Something went wrong!\n Make sure you have verified your mail',
                             ),
-                          );
-                        },
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TButton(
+                              constraints: constraints,
+                              btnColor: Theme.of(context).primaryColor,
+                              btnText: 'Sign up again!',
+                              onPressed: () {
+                                FirebaseAuth.instance.currentUser!.delete();
+                                FirebaseAuth.instance.signOut;
+                                PersistentNavBarNavigator.pushNewScreen(
+                                  context,
+                                  screen: const LoginScreen(),
+                                  withNavBar:
+                                      false, // OPTIONAL VALUE. True by default.
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       );
                     },
-                  ),
-                );
+                  );
+                }
+              } else {
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                ));
               }
             }));
   }
@@ -212,10 +292,12 @@ class Blancecard extends StatelessWidget {
     super.key,
     required this.orientation,
     required this.constraints,
+    required this.total,
   });
 
   final Orientation orientation;
   final BoxConstraints constraints;
+  final dynamic total;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -256,7 +338,7 @@ class Blancecard extends StatelessWidget {
                 color: Colors.white,
               ),
               Text(
-                "80,1000",
+                (total).toStringAsFixed(0),
                 style: TextStyle(
                     fontSize: constraints.maxWidth * 0.08,
                     color: Colors.white,

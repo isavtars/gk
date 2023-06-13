@@ -6,6 +6,7 @@ import 'color.dart';
 
 class GkThemsData {
   static final lightTheme = ThemeData(
+  
     canvasColor: kCardColor,
     textTheme: const TextTheme(
         bodyLarge: TextStyle(color: kFontBlackC),
