@@ -6,7 +6,7 @@ import '../../styles/color.dart';
 import '../../styles/sizeconfig.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/snackbar.dart';
+// import '../widgets/snackbar.dart';
 import 'verefirdmail.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -44,7 +44,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       debugPrint(res);
 
       if (res != "Succes") {
-        showSnackBar(context, text: res, color: Colors.red);
+        // showSnackBar(context, text: res, color: Colors.red);
+
+        Future<void>.delayed(Duration.zero, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(res.toString()),
+              backgroundColor: Colors.red,
+            ),
+          );
+        });
       } else {
         _formkey.currentState!.reset();
         // ignore: use_build_context_synchronously
@@ -133,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             credentials: false,
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The email";
+                                return "Email is required to proceed";
                               }
                               return null;
                             },
@@ -144,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomeInputs(
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The password";
+                                return "You left the password field blank";
                               }
                               return null;
                             },
@@ -160,9 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomeInputs(
                             validators: (value) {
                               if (value!.isEmpty) {
-                                return "Enter The confirmpassword";
+                                return "Re-enter the password to confirm";
                               } else if (value != passwordController.text) {
-                                return "Enter password And confirmpassword shouldbe same ";
+                                return "Seems like passwords does not matched";
                               }
                               return null;
                             },

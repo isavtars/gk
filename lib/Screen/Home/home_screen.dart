@@ -20,8 +20,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    //unused variable
+    // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
         body: StreamBuilder(

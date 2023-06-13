@@ -12,7 +12,7 @@ import '../../styles/sizeconfig.dart';
 import '../../utils/utils.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
-import '../widgets/snackbar.dart';
+// import '../widgets/snackbar.dart';
 
 class UserProfileUpdate extends StatefulWidget {
   const UserProfileUpdate({super.key});
@@ -62,11 +62,13 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
   }
 
   final user = Get.find<UserController>().getUsers!;
+
   updateUser() async {
     setState(() {
       isLoding = true;
     });
-    String res = await UserMethods().updateUserDate(
+
+    String res = await UserMethods().updateUserData(
         uid: user.uid,
         fullName: fullNameController.text.toString(),
         age: ageController.text.toString(),
@@ -75,10 +77,25 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
         kyc: kycController.text.toString(),
         incomeRange: reminderdropvalue,
         picfile: image!);
+
     if (res == "Success") {
       Get.back();
     } else {
-      showSnackBar(context, text: res.toString(), color: Colors.red);
+      // Don't use 'BuildContext's across async gaps. Try rewriting the code
+      // showSnackBar(context, text: res.toString(), color: Colors.red);
+
+//Instead use this code to not reference the 'BuildContext'.
+
+      Future<void>.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(res.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+      });
+
+//By using Future<void>.delayed(Duration.zero, () {}), we create a minimal delay to allow the asynchronous gap to be bridged. The showSnackBar call is then executed within the callback function, which is executed asynchronously after a very short delay.
     }
 
     setState(() {
@@ -182,107 +199,105 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                     //TextInputFeild
 
                     Form(
-                        child: Container(
-                      child: Column(
-                        children: [
-                          CustomeInputs(
-                            textEditingController: fullNameController,
-                            hintText: "fullName",
-                            icons: Icons.account_box,
-                            textinputTypes: TextInputType.text,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //pn
-                          CustomeInputs(
-                            textEditingController: phoneNumberController,
-                            hintText: "PhoneNumber",
-                            icons: Icons.phone,
-                            textinputTypes: TextInputType.phone,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //bankacc
-                          CustomeInputs(
-                            textEditingController: bankAccountController,
-                            hintText: "BankAcoountNumber",
-                            icons: Icons.account_balance,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          CustomeInputs(
-                            textEditingController: kycController,
-                            hintText: "Kyc Number",
-                            icons: Icons.account_balance,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          CustomeInputs(
-                            textEditingController: ageController,
-                            hintText: "Age",
-                            icons: Icons.account_circle_outlined,
-                            textinputTypes: TextInputType.number,
-                          ),
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-                          //dropedown
-                          CustomeInputWithdrop(
-                              perfix: Icons.currency_rupee,
-                              hintText: "$reminderdropvalue",
-                              // suffixIcon: Icons.keyboard_arrow_down,
-                              suffix: DropdownButton<String>(
-                                elevation: 10,
-                                iconSize: 32,
-                                style: kJakartaHeading4.copyWith(
-                                    color: kGrayTextfieldC, fontSize: 19),
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: kGrayTextfieldC,
-                                ),
-                                items: items.map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      value,
-                                      style: kJakartaHeading3.copyWith(
-                                          fontSize: 19, color: kGrayTextfieldC),
-                                    ),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) {
-                                  // This is called when the user selects an item.
-                                  setState(() {
-                                    reminderdropvalue = value!;
-                                  });
-                                },
-                              )),
-
-                          SizedBox(
-                            height: height * 1.4,
-                          ),
-
-                          CustomeBtn(
-                            btnTitleName: isLoding
-                                ? const CircularProgressIndicator()
-                                : Text(
-                                    "Continue",
-                                    style: kJakartaHeading3.copyWith(
-                                        color: Colors.white,
-                                        fontSize: height * 2),
+                        child: Column(
+                          children: [
+                            CustomeInputs(
+                              textEditingController: fullNameController,
+                              hintText: "fullName",
+                              icons: Icons.account_box,
+                              textinputTypes: TextInputType.text,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //pn
+                            CustomeInputs(
+                              textEditingController: phoneNumberController,
+                              hintText: "PhoneNumber",
+                              icons: Icons.phone,
+                              textinputTypes: TextInputType.phone,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //bankacc
+                            CustomeInputs(
+                              textEditingController: bankAccountController,
+                              hintText: "BankAcoountNumber",
+                              icons: Icons.account_balance,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            CustomeInputs(
+                              textEditingController: kycController,
+                              hintText: "Kyc Number",
+                              icons: Icons.account_balance,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            CustomeInputs(
+                              textEditingController: ageController,
+                              hintText: "Age",
+                              icons: Icons.account_circle_outlined,
+                              textinputTypes: TextInputType.number,
+                            ),
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+                            //dropedown
+                            CustomeInputWithdrop(
+                                perfix: Icons.currency_rupee,
+                                hintText: reminderdropvalue,
+                                // suffixIcon: Icons.keyboard_arrow_down,
+                                suffix: DropdownButton<String>(
+                                  elevation: 10,
+                                  iconSize: 32,
+                                  style: kJakartaHeading4.copyWith(
+                                      color: kGrayTextfieldC, fontSize: 19),
+                                  icon: const Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: kGrayTextfieldC,
                                   ),
-                            onPress: updateUser,
-                          ),
-                        ],
-                      ),
-                    )),
+                                  items: items.map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: kJakartaHeading3.copyWith(
+                                            fontSize: 19, color: kGrayTextfieldC),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? value) {
+                                    // This is called when the user selects an item.
+                                    setState(() {
+                                      reminderdropvalue = value!;
+                                    });
+                                  },
+                                )),
+
+                            SizedBox(
+                              height: height * 1.4,
+                            ),
+
+                            CustomeBtn(
+                              btnTitleName: isLoding
+                                  ? const CircularProgressIndicator()
+                                  : Text(
+                                      "Continue",
+                                      style: kJakartaHeading3.copyWith(
+                                          color: Colors.white,
+                                          fontSize: height * 2),
+                                    ),
+                              onPress: updateUser,
+                            ),
+                          ],
+                        )),
                     SizedBox(
                       height: height * 5,
                     ),
@@ -297,9 +312,6 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
   }
 }
 
-
-
-
 //TODO FOR THIS SCREEN
-//1 VALIDATION BOTH SIDE 
+//1 VALIDATION BOTH SIDE
 //CHANGE CircularProgressIndicator() COLOR
