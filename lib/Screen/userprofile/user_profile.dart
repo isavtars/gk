@@ -131,7 +131,7 @@ class UserProfile extends StatelessWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     const Spacer(),
-                    theheSwitcher(context, themcontroller),
+                    themeSwitcher(context, themcontroller),
                   ],
                 ),
                 SizedBox(
@@ -175,36 +175,37 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  FlutterSwitch theheSwitcher(BuildContext context, ThemModeChange themcontroller) {
+  FlutterSwitch themeSwitcher(
+      BuildContext context, ThemModeChange themcontroller) {
     return FlutterSwitch(
-                    width: 50,
-                    height: 30,
-                    padding: 0,
-                    activeToggleColor: kDarkCardC,
-                    inactiveToggleColor: Theme.of(context).primaryColor,
-                    activeSwitchBorder: Border.all(
-                      color: kDarkGreenBackC,
-                      width: 4,
-                    ),
-                    inactiveSwitchBorder: Border.all(
-                      color: kTextFieldBorderC,
-                      width: 4,
-                    ),
-                    activeColor: kDarkGreenColor,
-                    inactiveColor: kTextFieldColor,
-                    activeIcon: Icon(
-                      Icons.nightlight_round,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    inactiveIcon: const Icon(
-                      Icons.wb_sunny,
-                      color: kTextFieldColor,
-                    ),
-                    value: themcontroller.isDarkMode(),
-                    onToggle: (value) {
-                      themcontroller.switchTheme(value);
-                    },
-                  );
+      width: 50,
+      height: 30,
+      padding: 0,
+      activeToggleColor: kDarkCardC,
+      inactiveToggleColor: Theme.of(context).primaryColor,
+      activeSwitchBorder: Border.all(
+        color: kDarkGreenBackC,
+        width: 4,
+      ),
+      inactiveSwitchBorder: Border.all(
+        color: kTextFieldBorderC,
+        width: 4,
+      ),
+      activeColor: kDarkGreenColor,
+      inactiveColor: kTextFieldColor,
+      activeIcon: Icon(
+        Icons.nightlight_round,
+        color: Theme.of(context).primaryColor,
+      ),
+      inactiveIcon: const Icon(
+        Icons.wb_sunny,
+        color: kTextFieldColor,
+      ),
+      value: themcontroller.isDarkMode(),
+      onToggle: (value) {
+        themcontroller.switchTheme(value);
+      },
+    );
   }
 }
 
