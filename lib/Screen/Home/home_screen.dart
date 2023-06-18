@@ -20,26 +20,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
 
     //unused variable
     // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
         body: StreamBuilder(
-            stream: _firestore
+            stream: firestore
                 .collection('usersdata')
-                .doc(_auth.currentUser!.uid)
+                .doc(auth.currentUser!.uid)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data != null) {
-                  DocumentSnapshot<Map<String, dynamic>> map = snapshot.data!;
+              if (snapshot.data != null) {
+                DocumentSnapshot<Map<String, dynamic>> map = snapshot.data!;
+                Map<String, dynamic>? data = map.data();
 
-                  dynamic total = map['needAvailableBalance'] +
-                      map['expensesAvailableBalance'] +
-                      map['savings'];
+                if (data != null &&
+                    data.containsKey('needAvailableBalance') &&
+                    data.containsKey('expensesAvailableBalance') &&
+                    data.containsKey('savings')) {
+                  dynamic total = data['needAvailableBalance'] +
+                      data['expensesAvailableBalance'] +
+                      data['savings'];
 
                   return SafeArea(
                     child: LayoutBuilder(
@@ -155,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
 
                                       StreamBuilder(
-                                          stream: _firestore
+                                          stream: firestore
                                               .collection('alltransations')
                                               .snapshots(),
                                           builder: (context, snapshot) {
@@ -216,7 +220,7 @@ class HomeScreen extends StatelessWidget {
                                               } else {
                                                 const Center(
                                                   child: Text(
-                                                      "Trnsation has not done"),
+                                                      "No transactions found"),
                                                 );
                                               }
                                             } else {

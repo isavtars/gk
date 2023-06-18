@@ -27,6 +27,7 @@ class CustomeInputs extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(11)),
       child: TextFormField(
+        
         obscureText: credentials ? true : false,
         validator: validators,
         controller: textEditingController,

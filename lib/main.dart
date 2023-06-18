@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       builder: (themcontroller) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          // initialRoute: '/splashScreen',
+          initialRoute: '/splashScreen',
           initialBinding: MyBinding(),
           themeMode: themcontroller.themeMode,
           theme: GkThemsData.lightTheme,

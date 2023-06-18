@@ -81,19 +81,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     debugPrint("${SizeConfig.blockSizeVertical}");
     debugPrint("${SizeConfig.blockSizeHorizontal}");
 
-    bool isChecked = false;
-    Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
-        MaterialState.pressed,
-        MaterialState.hovered,
-        MaterialState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.green;
-      }
-      return Colors.green;
-    }
-
     return Scaffold(
       backgroundColor: kGreenColor,
       body: SingleChildScrollView(
@@ -104,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/images/logo.png',
+                        'assets/images/gharkharcha.png',
                       ))),
               height: SizeConfig.blockSizeVertical! * 32,
             ),
@@ -187,33 +174,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       height: SizeConfig.blockSizeVertical! * 1.8,
                     ),
-                    Center(
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                  checkColor: Colors.white,
-                                  fillColor: MaterialStateProperty.resolveWith(
-                                      getColor),
-                                  value: isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      isChecked = value!;
-                                    });
-                                  }),
-                              Text(
-                                  'Agree to our Privacy Policy and \nTerms & Conditions.',
-                                  maxLines: 2,
-                                  style: kJakartaBodyRegular.copyWith(
-                                    fontSize:
-                                        SizeConfig.blockSizeHorizontal! * 3.6,
-                                  )),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    Text(
+                        'By Signing up you agree to our Privacy Policy and Terms & Conditions',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: kJakartaBodyMedium.copyWith(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 2.8,
+                            height: 1.5)),
                     SizedBox(
                       height: SizeConfig.blockSizeVertical! * 1.8,
                     ),

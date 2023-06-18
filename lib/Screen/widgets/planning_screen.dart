@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 
-class PlanningScreeen extends StatelessWidget {
-  const PlanningScreeen({super.key});
+class PlanningScren extends StatelessWidget {
+  const PlanningScren({super.key});
 
   @override
   Widget build(BuildContext context) {
