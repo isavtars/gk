@@ -24,7 +24,7 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  final usercontroller = Get.find<UserController>().getUsers!;
+  final usercontroller = Get.find<UserController>().getUsers;
   @override
   void initState() {
     addData();
