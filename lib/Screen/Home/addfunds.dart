@@ -46,7 +46,7 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
       double? savings = double.tryParse(savingsController.text) ?? 10.0;
 
       if (amount == null) {
-         showSnackBar(context,
+        showSnackBar(context,
             text: "Please enter the amount", color: Colors.red);
       }
 
@@ -115,7 +115,8 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
               .doc(transationsId)
               .set(payer);
         });
-        showSnackBar(context, text: 'Yay! Funds added successfully!', color: Colors.green);
+        showSnackBar(context,
+            text: 'Yay! Funds added successfully!', color: Colors.green);
 
         Navigator.of(context).pop();
       } else {

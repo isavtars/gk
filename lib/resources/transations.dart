@@ -1,27 +1,20 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// class TransationsMethods {
-//   FirebaseAuth _auth = FirebaseAuth.instance;
-//   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+import '../model/transation_models.dart' as models;
 
-//   Future<String> allTransations() async {
-//     String res = "SomeThing Error Occures";
-//     try {
-      // DocumentSnapshot dsnap = (await _firestore
-      //     .collection('userdata')
-      //     .doc(_auth.currentUser!.uid)
-      //     .collection('alltransations')
-      //     .get()) as DocumentSnapshot<Object?>;
-      // var map = dsnap.data() as Map<String, dynamic>;
-      
-    
+class TransationsMethods {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-   
-//     } catch (err) {
-//       res = err.toString();
-//     }
+  Future<models.Transations> allTransations() async {
+    QuerySnapshot<Map<String, dynamic>> documentSnapshot = await _firestore
+        .collection('userdata')
+        .doc(_auth.currentUser!.uid)
+        .collection('alltransations')
+        .get();
 
-//     return res;
-//   }
-// }
+    return models.Transations.fromSnap(
+        documentSnapshot as DocumentSnapshot<Object?>);
+  }
+}

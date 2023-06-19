@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import '../../logic/user_controller.dart';
 import '../Home/home_screen.dart';
 import '../auth/login.dart';
+import '../planning/planning.dart';
 import '../userprofile/user_profile.dart';
 import '../wallet/wallet.dart';
-import 'demo_screen.dart';
+
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import '../../model/transation_models.dart';
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final FirebaseAuth _auth = FirebaseAuth.instance;
+    Transations? transations;
 
     //unused variable
     // final FirebaseAuth auth = FirebaseAuth.instance;
@@ -154,85 +156,7 @@ class HomeScreen extends StatelessWidget {
                                         height: constraints.maxHeight * 0.02,
                                       ),
 
-                                      StreamBuilder(
-                                          stream: _firestore
-                                              .collection('alltransations')
-                                              .snapshots(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              if (snapshot.data != null) {
-                                                QuerySnapshot<
-                                                        Map<String, dynamic>>
-                                                    querySnapshot =
-                                                    snapshot.data!;
-                                                List<
-                                                        QueryDocumentSnapshot<
-                                                            Map<String,
-                                                                dynamic>>>
-                                                    documents =
-                                                    querySnapshot.docs;
-
-                                                List<dynamic> list = documents
-                                                    .map((doc) => doc.data())
-                                                    .toList();
-                                                list.sort((a, b) => b[
-                                                        'paymentDateTime']
-                                                    .compareTo(
-                                                        a['paymentDateTime']));
-                                                SizedBox(
-                                                  height: 300,
-                                                  child: ListView.builder(
-                                                      itemCount: list.length,
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        dynamic formatDate(
-                                                            String date) {
-                                                          final dynamic
-                                                              newDate =
-                                                              DateTime.parse(
-                                                                  date);
-                                                          final DateFormat
-                                                              formatter =
-                                                              DateFormat(
-                                                                  'E, d MMMM,   hh:mm a');
-                                                          final dynamic
-                                                              formatted =
-                                                              formatter.format(
-                                                                  newDate);
-                                                          return formatted;
-                                                        }
-
-                                                        return AmountsCards(
-                                                          transCard: TransCard
-                                                              .transCard[index],
-                                                          dateTime: formatDate(
-                                                              TransCard
-                                                                  .transCard[
-                                                                      index]
-                                                                  .dateTime),
-                                                        );
-                                                      }),
-                                                );
-                                              } else {
-                                                const Center(
-                                                  child: Text(
-                                                      "Trnsation has not done"),
-                                                );
-                                              }
-                                            } else {
-                                              return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                color: kDefaultIconLightColor,
-                                              ));
-                                            }
-
-                                            return const Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                              color: kDefaultIconLightColor,
-                                            ));
-                                          }),
+                                      alltransations(_firestore, _auth),
 
                                       // transations
                                     ]),
@@ -287,6 +211,58 @@ class HomeScreen extends StatelessWidget {
                 ));
               }
             }));
+  }
+
+  StreamBuilder<DocumentSnapshot> alltransations(
+      FirebaseFirestore _firestore, FirebaseAuth _auth) {
+    return StreamBuilder<DocumentSnapshot>(
+        stream: _firestore
+            .collection('usersdata')
+            .doc(_auth.currentUser!.uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasData) {
+            // Access the document data
+            final snapData = snapshot.data!.data() as Map<String, dynamic>;
+
+            if (snapData.containsKey('alltransations')) {
+              // Access the child collection data
+              final childrenCollection =
+                  snapData['alltransations'] as List<dynamic>;
+
+              return SizedBox(
+                height: 300,
+                child: ListView.builder(
+                    itemCount: childrenCollection.length,
+                    itemBuilder: (context, index) {
+                      // Access the data of each child document
+                      final childDocumentData =
+                          childrenCollection[index] as Map<String, dynamic>;
+
+                      // Access the fields within the child document
+                      final amount = childDocumentData['amount'];
+                      final count = childDocumentData['count'];
+                      final name = childDocumentData['name'];
+                      final paymentDateTime =
+                          childDocumentData['paymentDateTime'];
+                      return AmountsCards(
+                        amount: amount,
+                        count: count,
+                        title: name,
+                        dateTime: formatDate(paymentDateTime),
+                      );
+                    }),
+              );
+            } else {
+              return const Center(child: Text('Transations are not done yet'));
+            }
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.green,
+            ));
+          }
+        });
   }
 }
 
@@ -452,10 +428,16 @@ class Blancecard extends StatelessWidget {
 
 class AmountsCards extends StatelessWidget {
   const AmountsCards(
-      {super.key, required this.transCard, required this.dateTime});
+      {super.key,
+      required this.dateTime,
+      required this.title,
+      required this.amount,
+      required this.count});
 
-  final TransCard transCard;
   final String dateTime;
+  final String title;
+  final String amount;
+  final String count;
 
   @override
   Widget build(BuildContext context) {
@@ -476,7 +458,7 @@ class AmountsCards extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  transCard.titleName,
+                  title,
                   style: kJakartaHeading4.copyWith(),
                 ),
                 Text(
@@ -486,10 +468,18 @@ class AmountsCards extends StatelessWidget {
               ],
             ),
             Text(
-              transCard.amounts,
+              "heloo",
               style: kJakartaBodyRegular.copyWith(),
             )
           ]),
     );
   }
+}
+
+//date formatteds
+dynamic formatDate(String date) {
+  final dynamic newDate = DateTime.parse(date);
+  final DateFormat formatter = DateFormat('E, d MMMM,   hh:mm a');
+  final dynamic formatted = formatter.format(newDate);
+  return formatted;
 }
