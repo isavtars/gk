@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import '../../model/transation_models.dart';
+
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
@@ -12,7 +12,7 @@ import '../widgets/custom_buttons.dart';
 import '../widgets/custom_cards.dart';
 import '../widgets/null_errors.dart';
 import 'addfunds.dart';
-import 'transcard_models.dart';
+// import 'transcard_models.dart';
 import 'package:intl/intl.dart';
 
 //homepages
@@ -23,16 +23,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    Transations? transations;
+    // Transations? transations;
 
     //unused variable
     // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
         body: StreamBuilder(
-            stream: firestore
+            stream: _firestore
                 .collection('usersdata')
-                .doc(auth.currentUser!.uid)
+                .doc(_auth.currentUser!.uid)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
@@ -208,14 +208,12 @@ class HomeScreen extends StatelessWidget {
                                                           return formatted;
                                                         }
 
-                                                        return AmountsCards(
-                                                          transCard: TransCard
-                                                              .transCard[index],
-                                                          dateTime: formatDate(
-                                                              TransCard
-                                                                  .transCard[
-                                                                      index]
-                                                                  .dateTime),
+                                                        return const  AmountsCards(
+                                                          title: "eeee",
+                                                          dateTime: "10/20/2023",
+                                                          amount:"10,00" ,
+                                                          count: "10",
+                                                          
                                                         );
                                                       }),
                                                 );

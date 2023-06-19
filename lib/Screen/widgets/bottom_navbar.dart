@@ -15,6 +15,8 @@ import '../../styles/gharkharcha_themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import 'planning_screen.dart';
+
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -31,7 +33,6 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   final controller = PersistentTabController(initialIndex: 0);
-  
 
   void addData() async {
     final usercontroller = Get.find<UserController>();
