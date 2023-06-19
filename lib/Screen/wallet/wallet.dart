@@ -10,7 +10,7 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with TickerProviderStateMixin {
-  late TabController _tabController = TabController(length: 3, vsync: this);
+  late final TabController _tabController = TabController(length: 3, vsync: this);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,19 +36,17 @@ class _WalletScreenState extends State<WalletScreen>
                       SizedBox(
                         height: constraints.maxHeight * 0.005,
                       ),
-                      Container(
-                        child: TabBar(
-                          indicatorSize: TabBarIndicatorSize.label,
-                          labelColor: kGreenColor,
-                          controller: _tabController,
-                          unselectedLabelColor: kGrayTextC,
-                          indicatorColor: kGreenColor,
-                          tabs: const [
-                            Tab(text: 'Need'),
-                            Tab(text: 'Expenses'),
-                            Tab(text: 'Savings'),
-                          ],
-                        ),
+                      TabBar(
+                        indicatorSize: TabBarIndicatorSize.label,
+                        labelColor: kGreenColor,
+                        controller: _tabController,
+                        unselectedLabelColor: kGrayTextC,
+                        indicatorColor: kGreenColor,
+                        tabs: const [
+                          Tab(text: 'Need'),
+                          Tab(text: 'Expenses'),
+                          Tab(text: 'Savings'),
+                        ],
                       ),
                       Expanded(
                         // height: constraints.maxHeight * 0.8,

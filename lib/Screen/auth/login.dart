@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gk/logic/user_controller.dart';
 
 import '../../resources/auth_resources.dart';
 import '../../styles/color.dart';
@@ -49,7 +48,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } else {
       _formGlobal.currentState!.reset();
-     
     }
     setState(() {
       _isLoading = false;
@@ -77,10 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/images/logo.png',
+                        'assets/images/gharkharcha.png',
                       ))),
               height: SizeConfig.blockSizeVertical! * 43,
-              child: Center(child: Image.asset('assets/images/logo.png')),
+              // child: Center(child: Image.asset('assets/images/gharkharcha new.png')),
             ),
             Container(
               height: SizeConfig.blockSizeVertical! * 57,
@@ -155,24 +153,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: SizeConfig.blockSizeVertical! * 2.2,
                     ),
-                    Text.rich(TextSpan(children: [
-                      TextSpan(
-                          text: "    New to the GharKharcha ?",
-                          style: kJakartaBodyRegular.copyWith()),
-                      TextSpan(
-                          text: " Register",
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => Get.toNamed("/register"),
-                          style:
-                              kJakartaBodyRegular.copyWith(color: kGreenColor))
-                    ])),
-                    TextButton(
-                        onPressed: () {
-                          Get.toNamed('/forgot_password');
-                        },
-                        child: Text("Forgot password ?",
-                            style: kJakartaBodyRegular.copyWith(
-                                color: kGreenColor)))
+                    Center(
+                      child: Text.rich(TextSpan(children: [
+                        TextSpan(
+                            text: "New to the GharKharcha ?",
+                            style: kJakartaBodyRegular.copyWith()),
+                        TextSpan(
+                            text: "\tRegister",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Get.toNamed("/register"),
+                            style:
+                                kJakartaBodyRegular.copyWith(color: kGreenColor))
+                      ])),
+                    ),
+                    Center(
+                      child: TextButton(
+                          onPressed: () {
+                            Get.toNamed('/forgot_password');
+                          },
+                          child: Text("Forgot password ?",
+                              style: kJakartaBodyRegular.copyWith(
+                                  color: kGreenColor))),
+                    )
                   ]),
             )
           ],

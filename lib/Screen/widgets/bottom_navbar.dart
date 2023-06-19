@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gk/Screen/widgets/drawer.dart';
 
 import '../../logic/user_controller.dart';
 import '../Home/home_screen.dart';
@@ -22,6 +23,7 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
+  final usercontroller = Get.find<UserController>().getUsers!;
   @override
   void initState() {
     addData();
@@ -29,6 +31,7 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   final controller = PersistentTabController(initialIndex: 0);
+  
 
   void addData() async {
     final usercontroller = Get.find<UserController>();
@@ -39,7 +42,7 @@ class _BottomNavState extends State<BottomNav> {
     return const [
       HomeScreen(),
       WalletScreen(),
-      PlanningScreeen(),
+      PlanningScren(),
       UserProfile(),
     ];
   }
@@ -79,29 +82,32 @@ class _BottomNavState extends State<BottomNav> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return PersistentTabView(
-              context,
-              screens: _buildScreen(),
-              items: navBarItem(),
-              controller: controller,
-              navBarHeight: 60,
-              decoration: NavBarDecoration(
-                  // ignore: unrelated_type_equality_checks
-                  colorBehindNavBar: GkThemsData.isDarkMode(context) == true
-                      ? kDarkGreenBackC
-                      : kGreenDarkC,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              padding: const NavBarPadding.all(0),
-              backgroundColor: Theme.of(context).primaryColor,
-              navBarStyle: NavBarStyle.style3,
-              itemAnimationProperties: const ItemAnimationProperties(
-                duration: Duration(milliseconds: 400),
-                curve: Curves.ease,
+            return Scaffold(
+              drawer: DrawerWidget(),
+              body: PersistentTabView(
+                context,
+                screens: _buildScreen(),
+                items: navBarItem(),
+                controller: controller,
+                navBarHeight: 60,
+                decoration: NavBarDecoration(
+                    // ignore: unrelated_type_equality_checks
+                    colorBehindNavBar: GkThemsData.isDarkMode(context) == true
+                        ? kDarkGreenBackC
+                        : kGreenDarkC,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15))),
+                padding: const NavBarPadding.all(0),
+                backgroundColor: Theme.of(context).primaryColor,
+                navBarStyle: NavBarStyle.style3,
+                itemAnimationProperties: const ItemAnimationProperties(
+                  duration: Duration(milliseconds: 400),
+                  curve: Curves.ease,
+                ),
+                screenTransitionAnimation:
+                    const ScreenTransitionAnimation(curve: Curves.ease),
               ),
-              screenTransitionAnimation:
-                  const ScreenTransitionAnimation(curve: Curves.ease),
             );
           }
 

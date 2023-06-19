@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../styles/color.dart';
 import '../../styles/sizeconfig.dart';
 import '../widgets/custom_buttons.dart';
@@ -69,7 +68,7 @@ class _ForgetScreenState extends State<ForgotPassScreen> {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        'assets/images/logo.png',
+                        'assets/images/gharkharcha.png',
                       ))),
               height: SizeConfig.blockSizeVertical! * 55,
             ),
@@ -95,16 +94,6 @@ class _ForgetScreenState extends State<ForgotPassScreen> {
                     SizedBox(
                       height: SizeConfig.blockSizeVertical! * 2.5,
                     ),
-                    Text(
-                        'A password reset link will be sent to the above mentioned email.',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: kJakartaBodyMedium.copyWith(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 4.1)),
-                    SizedBox(
-                      height: SizeConfig.blockSizeVertical! * 2.5,
-                    ),
                     Form(
                       key: _formKey,
                       child: CustomeInputs(
@@ -121,7 +110,16 @@ class _ForgetScreenState extends State<ForgotPassScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: SizeConfig.blockSizeVertical! * 2,
+                      height: SizeConfig.blockSizeVertical! * 1.0,
+                    ),
+                    Text('\tA password reset link will be sent to this email.',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: kJakartaBodyMedium.copyWith(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: SizeConfig.blockSizeHorizontal! * 4.1)),
+                    SizedBox(
+                      height: SizeConfig.blockSizeVertical! * 2.5,
                     ),
                     CustomeBtn(
                       btnTitleName: isLoading
