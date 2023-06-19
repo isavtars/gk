@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../model/transation_models.dart' as models;
 
 class TransationsMethods {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<models.Transations> allTransations() async {
     QuerySnapshot<Map<String, dynamic>> documentSnapshot = await _firestore
