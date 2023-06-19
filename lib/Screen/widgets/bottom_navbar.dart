@@ -5,14 +5,17 @@ import 'package:gk/Screen/widgets/drawer.dart';
 import '../../logic/user_controller.dart';
 import '../Home/home_screen.dart';
 import '../auth/login.dart';
+import '../planning/planning.dart';
 import '../userprofile/user_profile.dart';
 import '../wallet/wallet.dart';
-import 'planning_screen.dart';
+
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+
+import 'planning_screen.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -30,7 +33,6 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   final controller = PersistentTabController(initialIndex: 0);
-  
 
   void addData() async {
     final usercontroller = Get.find<UserController>();
@@ -114,3 +116,5 @@ class _BottomNavState extends State<BottomNav> {
         });
   }
 }
+
+//heloo

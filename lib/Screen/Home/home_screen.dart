@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
@@ -11,7 +12,7 @@ import '../widgets/custom_buttons.dart';
 import '../widgets/custom_cards.dart';
 import '../widgets/null_errors.dart';
 import 'addfunds.dart';
-import 'transcard_models.dart';
+// import 'transcard_models.dart';
 import 'package:intl/intl.dart';
 
 //homepages
@@ -20,17 +21,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    // Transations? transations;
 
     //unused variable
     // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
         body: StreamBuilder(
-            stream: firestore
+            stream: _firestore
                 .collection('usersdata')
-                .doc(auth.currentUser!.uid)
+                .doc(_auth.currentUser!.uid)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
@@ -159,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                                       ),
 
                                       StreamBuilder(
-                                          stream: firestore
+                                          stream: _firestore
                                               .collection('alltransations')
                                               .snapshots(),
                                           builder: (context, snapshot) {
@@ -206,21 +208,19 @@ class HomeScreen extends StatelessWidget {
                                                           return formatted;
                                                         }
 
-                                                        return AmountsCards(
-                                                          transCard: TransCard
-                                                              .transCard[index],
-                                                          dateTime: formatDate(
-                                                              TransCard
-                                                                  .transCard[
-                                                                      index]
-                                                                  .dateTime),
+                                                        return const  AmountsCards(
+                                                          title: "eeee",
+                                                          dateTime: "10/20/2023",
+                                                          amount:"10,00" ,
+                                                          count: "10",
+                                                          
                                                         );
                                                       }),
                                                 );
                                               } else {
                                                 const Center(
                                                   child: Text(
-                                                      "No transactions found"),
+                                                      "Trnsation has not done"),
                                                 );
                                               }
                                             } else {
@@ -291,6 +291,58 @@ class HomeScreen extends StatelessWidget {
                 ));
               }
             }));
+  }
+
+  StreamBuilder<DocumentSnapshot> alltransations(
+      FirebaseFirestore _firestore, FirebaseAuth _auth) {
+    return StreamBuilder<DocumentSnapshot>(
+        stream: _firestore
+            .collection('usersdata')
+            .doc(_auth.currentUser!.uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasData) {
+            // Access the document data
+            final snapData = snapshot.data!.data() as Map<String, dynamic>;
+
+            if (snapData.containsKey('alltransations')) {
+              // Access the child collection data
+              final childrenCollection =
+                  snapData['alltransations'] as List<dynamic>;
+
+              return SizedBox(
+                height: 300,
+                child: ListView.builder(
+                    itemCount: childrenCollection.length,
+                    itemBuilder: (context, index) {
+                      // Access the data of each child document
+                      final childDocumentData =
+                          childrenCollection[index] as Map<String, dynamic>;
+
+                      // Access the fields within the child document
+                      final amount = childDocumentData['amount'];
+                      final count = childDocumentData['count'];
+                      final name = childDocumentData['name'];
+                      final paymentDateTime =
+                          childDocumentData['paymentDateTime'];
+                      return AmountsCards(
+                        amount: amount,
+                        count: count,
+                        title: name,
+                        dateTime: formatDate(paymentDateTime),
+                      );
+                    }),
+              );
+            } else {
+              return const Center(child: Text('Transations are not done yet'));
+            }
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.green,
+            ));
+          }
+        });
   }
 }
 
@@ -456,10 +508,16 @@ class Blancecard extends StatelessWidget {
 
 class AmountsCards extends StatelessWidget {
   const AmountsCards(
-      {super.key, required this.transCard, required this.dateTime});
+      {super.key,
+      required this.dateTime,
+      required this.title,
+      required this.amount,
+      required this.count});
 
-  final TransCard transCard;
   final String dateTime;
+  final String title;
+  final String amount;
+  final String count;
 
   @override
   Widget build(BuildContext context) {
@@ -480,7 +538,7 @@ class AmountsCards extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  transCard.titleName,
+                  title,
                   style: kJakartaHeading4.copyWith(),
                 ),
                 Text(
@@ -490,10 +548,18 @@ class AmountsCards extends StatelessWidget {
               ],
             ),
             Text(
-              transCard.amounts,
+              "heloo",
               style: kJakartaBodyRegular.copyWith(),
             )
           ]),
     );
   }
+}
+
+//date formatteds
+dynamic formatDate(String date) {
+  final dynamic newDate = DateTime.parse(date);
+  final DateFormat formatter = DateFormat('E, d MMMM,   hh:mm a');
+  final dynamic formatted = formatter.format(newDate);
+  return formatted;
 }
