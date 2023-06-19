@@ -7,7 +7,7 @@ import '../../styles/sizeconfig.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_inputs.dart';
 // import '../widgets/snackbar.dart';
-import 'verefirdmail.dart';
+import 'verifiedemail.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
