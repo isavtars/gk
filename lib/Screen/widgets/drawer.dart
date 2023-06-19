@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gk/Screen/Home/home_screen.dart';
+import 'package:gk/Screen/auth/login.dart';
 import 'package:gk/Screen/planning/planning.dart';
 import 'package:gk/Screen/userprofile/user_profile.dart';
 import 'package:gk/Screen/wallet/wallet.dart';
@@ -24,6 +26,7 @@ class DrawerWidget extends StatelessWidget {
             accountEmail: Text(usercontroller.email),
             decoration: const BoxDecoration(color: kGreenColor),
             currentAccountPicture: CircleAvatar(
+              backgroundColor: kGreenColor,
               backgroundImage: NetworkImage(usercontroller.profilePic),
             ),
           ),
@@ -50,7 +53,7 @@ class DrawerWidget extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.person),
-            title: const Text('User Profile'),
+            title: const Text('Profile'),
             onTap: () {
               Get.to(const UserProfile());
             },
@@ -60,6 +63,15 @@ class DrawerWidget extends StatelessWidget {
             title: const Text('Calculate EMI'),
             onTap: () {
               Get.to(EMICalculator());
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red,),
+            title: const Text('LOGOUT', style: TextStyle(color: Colors.red),),
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             },
           ),
         ],
