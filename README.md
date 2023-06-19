@@ -7,7 +7,7 @@ Home expenses tracking mobile applications are software tools that help individu
 
 ## GharKharcha (Expense Tracker App)
 
-- ![Test Image 4](https://github.com/isavtars/gk/blob/master/gharkharcha%20new.png)
+- ![Test Image 4](https://github.com/isavtars/gk/blob/master/gharkharcha.png)
 
 This repository contains the source code for the GharKharcha Flutter app, which is primarily focused on tracking daily expenses of a home. The app utilizes Firebase for authentication and storage.
 
