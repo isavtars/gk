@@ -39,11 +39,12 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
 
   void add() async {
     if (_formKey.currentState!.validate()) {
-      double? totalAmount = double.tryParse(amountController.text);
+      double? totalAmount = double.tryParse(amountController.text)??0.0;
       double? amount = double.tryParse(amountController.text);
       double? need = double.tryParse(needController.text) ?? 50.0;
       double? expenses = double.tryParse(expensesController.text) ?? 30.0;
       double? savings = double.tryParse(savingsController.text) ?? 10.0;
+
 
       if (amount == null) {
         showSnackBar(context,
@@ -103,7 +104,8 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
 
           final payer = {
             'name': 'Funds added!',
-            'amount': '+ ${amountController.text}',
+            'amount': FieldValue.increment(totalAmount),
+            // 'amount': '+ ${totalAmount.toString()}',
             'paymentDateTime': DateTime.now().toIso8601String(),
             'count': FieldValue.increment(1),
           };
@@ -111,7 +113,7 @@ class _AddFundsScreenState extends State<AddFundsScreen> {
           firestore
               .collection("usersdata")
               .doc(auth.currentUser!.uid)
-              .collection("alltransations")
+              .collection("alltransactions")
               .doc(transationsId)
               .set(payer);
         });
