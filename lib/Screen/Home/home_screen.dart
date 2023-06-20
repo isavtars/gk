@@ -20,8 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
     // Transations? transations;
 
     //unused variable
@@ -29,9 +29,9 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
         body: StreamBuilder(
-            stream: _firestore
+            stream: firestore
                 .collection('usersdata')
-                .doc(_auth.currentUser!.uid)
+                .doc(auth.currentUser!.uid)
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
@@ -293,11 +293,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   StreamBuilder<DocumentSnapshot> alltransations(
-      FirebaseFirestore _firestore, FirebaseAuth _auth) {
+      FirebaseFirestore firestore, FirebaseAuth auth) {
     return StreamBuilder<DocumentSnapshot>(
-        stream: _firestore
+        stream: firestore
             .collection('usersdata')
-            .doc(_auth.currentUser!.uid)
+            .doc(auth.currentUser!.uid)
             .snapshots(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasData) {
