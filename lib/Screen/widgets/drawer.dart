@@ -22,7 +22,7 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(usercontroller.fullName),
+            accountName: Text(usercontroller.uid),
             accountEmail: Text(usercontroller.email),
             decoration: const BoxDecoration(color: kGreenColor),
             currentAccountPicture: CircleAvatar(
@@ -66,8 +66,14 @@ class DrawerWidget extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red,),
-            title: const Text('LOGOUT', style: TextStyle(color: Colors.red),),
+            leading: const Icon(
+              Icons.logout,
+              color: Colors.red,
+            ),
+            title: const Text(
+              'LOGOUT',
+              style: TextStyle(color: Colors.red),
+            ),
             onTap: () {
               FirebaseAuth.instance.signOut();
               Navigator.pushReplacement(context,
