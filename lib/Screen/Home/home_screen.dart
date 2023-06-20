@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-
 import '../../styles/color.dart';
 import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
@@ -160,83 +159,83 @@ class HomeScreen extends StatelessWidget {
                                         height: constraints.maxHeight * 0.02,
                                       ),
 
-                                      StreamBuilder(
-                                          stream: _firestore
-                                              .collection('alltransations')
-                                              .snapshots(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              if (snapshot.data != null) {
-                                                QuerySnapshot<
-                                                        Map<String, dynamic>>
-                                                    querySnapshot =
-                                                    snapshot.data!;
-                                                List<
-                                                        QueryDocumentSnapshot<
-                                                            Map<String,
-                                                                dynamic>>>
-                                                    documents =
-                                                    querySnapshot.docs;
+                                      // StreamBuilder(
+                                      //     stream: _firestore
+                                      //         .collection('alltransations')
+                                      //         .snapshots(),
+                                      //     builder: (context, snapshot) {
+                                      //       if (snapshot.hasData) {
+                                      //         if (snapshot.data != null) {
+                                      //           QuerySnapshot<
+                                      //                   Map<String, dynamic>>
+                                      //               querySnapshot =
+                                      //               snapshot.data!;
+                                      //           List<
+                                      //                   QueryDocumentSnapshot<
+                                      //                       Map<String,
+                                      //                           dynamic>>>
+                                      //               documents =
+                                      //               querySnapshot.docs;
 
-                                                List<dynamic> list = documents
-                                                    .map((doc) => doc.data())
-                                                    .toList();
-                                                list.sort((a, b) => b[
-                                                        'paymentDateTime']
-                                                    .compareTo(
-                                                        a['paymentDateTime']));
-                                                SizedBox(
-                                                  height: 300,
-                                                  child: ListView.builder(
-                                                      itemCount: list.length,
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        dynamic formatDate(
-                                                            String date) {
-                                                          final dynamic
-                                                              newDate =
-                                                              DateTime.parse(
-                                                                  date);
-                                                          final DateFormat
-                                                              formatter =
-                                                              DateFormat(
-                                                                  'E, d MMMM,   hh:mm a');
-                                                          final dynamic
-                                                              formatted =
-                                                              formatter.format(
-                                                                  newDate);
-                                                          return formatted;
-                                                        }
+                                      //           List<dynamic> list = documents
+                                      //               .map((doc) => doc.data())
+                                      //               .toList();
+                                      //           list.sort((a, b) => b[
+                                      //                   'paymentDateTime']
+                                      //               .compareTo(
+                                      //                   a['paymentDateTime']));
+                                      //           SizedBox(
+                                      //             height: 300,
+                                      //             child: ListView.builder(
+                                      //                 itemCount: list.length,
+                                      //                 itemBuilder:
+                                      //                     (context, index) {
+                                      //                   dynamic formatDate(
+                                      //                       String date) {
+                                      //                     final dynamic
+                                      //                         newDate =
+                                      //                         DateTime.parse(
+                                      //                             date);
+                                      //                     final DateFormat
+                                      //                         formatter =
+                                      //                         DateFormat(
+                                      //                             'E, d MMMM,   hh:mm a');
+                                      //                     final dynamic
+                                      //                         formatted =
+                                      //                         formatter.format(
+                                      //                             newDate);
+                                      //                     return formatted;
+                                      //                   }
 
-                                                        return const  AmountsCards(
-                                                          title: "eeee",
-                                                          dateTime: "10/20/2023",
-                                                          amount:"10,00" ,
-                                                          count: "10",
-                                                          
-                                                        );
-                                                      }),
-                                                );
-                                              } else {
-                                                const Center(
-                                                  child: Text(
-                                                      "Trnsation has not done"),
-                                                );
-                                              }
-                                            } else {
-                                              return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                color: kDefaultIconLightColor,
-                                              ));
-                                            }
+                                      //                   return const  AmountsCards(
+                                      //                     title: "eeee",
+                                      //                     dateTime: "10/20/2023",
+                                      //                     amount:"10,00" ,
+                                      //                     count: "10",
 
-                                            return const Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                              color: kDefaultIconLightColor,
-                                            ));
-                                          }),
+                                      //                   );
+                                      //                 }),
+                                      //           );
+                                      //         } else {
+                                      //           const Center(
+                                      //             child: Text(
+                                      //                 "Trnsation has not done"),
+                                      //           );
+                                      //         }
+                                      //       } else {
+                                      //         return const Center(
+                                      //             child:
+                                      //                 CircularProgressIndicator(
+                                      //           color: kDefaultIconLightColor,
+                                      //         ));
+                                      //       }
+
+                                      //       return const Center(
+                                      //           child:
+                                      //               CircularProgressIndicator(
+                                      //         color: kDefaultIconLightColor,
+                                      //       ));
+                                      //     }),
 
                                       // transations
                                     ]),

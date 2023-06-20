@@ -46,13 +46,13 @@ class MyApp extends StatelessWidget {
             GetPage(name: "/home", page: () => const HomeScreen()),
           ],
           defaultTransition: Transition.cupertino,
-          home: StreamBuilder(
+          home: StreamBuilder<User?>(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 // Checking if the snapshot has any data or not
                 if (snapshot.hasData) {
-                  debugPrint(snapshot.hasData.toString());
+                  debugPrint("${snapshot.hasData}hello this the data");
                   // if snapshot has data which means user is logged in then we check the width
                   // of screen and accordingly display the screen layout
                   return const BottomNav();

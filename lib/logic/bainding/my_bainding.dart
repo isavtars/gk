@@ -7,6 +7,6 @@ class MyBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ThemModeChange());
-    Get.lazyPut(() => UserController());
+    Get.put(UserController());
   }
 }

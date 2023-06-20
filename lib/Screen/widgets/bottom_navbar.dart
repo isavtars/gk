@@ -15,8 +15,6 @@ import '../../styles/gharkharcha_themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'planning_screen.dart';
-
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -25,7 +23,6 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  final usercontroller = Get.find<UserController>().getUsers!;
   @override
   void initState() {
     addData();
@@ -43,7 +40,7 @@ class _BottomNavState extends State<BottomNav> {
     return const [
       HomeScreen(),
       WalletScreen(),
-      PlanningScren(),
+      PlanningScreeen(),
       UserProfile(),
     ];
   }
@@ -84,7 +81,7 @@ class _BottomNavState extends State<BottomNav> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              drawer: DrawerWidget(),
+              // drawer: DrawerWidget(),
               body: PersistentTabView(
                 context,
                 screens: _buildScreen(),
