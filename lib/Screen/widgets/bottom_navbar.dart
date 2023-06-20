@@ -5,6 +5,7 @@ import 'package:gk/Screen/widgets/drawer.dart';
 import '../../logic/user_controller.dart';
 import '../Home/home_screen.dart';
 import '../auth/login.dart';
+import '../planning/planning.dart';
 import '../userprofile/user_profile.dart';
 import '../wallet/wallet.dart';
 
@@ -39,7 +40,7 @@ class _BottomNavState extends State<BottomNav> {
     return const [
       HomeScreen(),
       WalletScreen(),
-      PlanningScreeen(),
+   PlanningScreeen(),
       UserProfile(),
     ];
   }
@@ -80,7 +81,7 @@ class _BottomNavState extends State<BottomNav> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              // drawer: DrawerWidget(),
+              drawer: DrawerWidget(),
               body: PersistentTabView(
                 context,
                 screens: _buildScreen(),
