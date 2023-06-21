@@ -20,78 +20,83 @@ class _EMICalculatorState extends State<EMICalculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kGreenColor,
       appBar: AppBar(
         title: const Text('EMI Calculator'),
         backgroundColor: kGreenColor,
       ),
       drawer: DrawerWidget(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            
-            const SizedBox(height: 25.0),
-            CustomeInputs(
-              textEditingController: principalController,
-              hintText: 'Principal Amount',
-              icons: Icons.attach_money,
-              validators: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter the principal amount';
-                }
-                return null;
-              },
-              textinputTypes: TextInputType.number,
-            ),
-            const SizedBox(height: 16.0),
-            CustomeInputs(
-              textEditingController: interestRateController,
-              hintText: 'Interest Rate (%)',
-              icons: Icons.monetization_on,
-              validators: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter the interest rate';
-                }
-                return null;
-              },
-              textinputTypes: TextInputType.number,
-            ),
-            const SizedBox(height: 16.0),
-            CustomeInputs(
-              textEditingController: tenureController,
-              hintText: 'Tenure (months)',
-              icons: Icons.event,
-              validators: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter the tenure';
-                }
-                return null;
-              },
-              textinputTypes: TextInputType.number,
-            ),
-            const SizedBox(height: 16.0),
-            CustomeBtn(
-                btnTitleName: const Text(
-                  'Calculate EMI',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0),
-                ),
-                onPress: calculateEMI),
-                const SizedBox(height: 30,),
-                Center(
-              child: Text(
-                'Rs. ${emi.toStringAsFixed(2)}/mo',
-                style: const TextStyle(
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                    color: kGreenColor),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Theme.of(context).cardColor,
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 25.0),
+              CustomeInputs(
+                textEditingController: principalController,
+                hintText: 'Principal Amount',
+                icons: Icons.attach_money,
+                validators: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter the principal amount';
+                  }
+                  return null;
+                },
+                textinputTypes: TextInputType.number,
               ),
-            ),
-          ],
+              const SizedBox(height: 16.0),
+              CustomeInputs(
+                textEditingController: interestRateController,
+                hintText: 'Interest Rate (%)',
+                icons: Icons.monetization_on,
+                validators: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter the interest rate';
+                  }
+                  return null;
+                },
+                textinputTypes: TextInputType.number,
+              ),
+              const SizedBox(height: 16.0),
+              CustomeInputs(
+                textEditingController: tenureController,
+                hintText: 'Tenure (months)',
+                icons: Icons.event,
+                validators: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter the tenure';
+                  }
+                  return null;
+                },
+                textinputTypes: TextInputType.number,
+              ),
+              const SizedBox(height: 16.0),
+              CustomeBtn(
+                  btnTitleName: const Text(
+                    'Calculate EMI',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
+                  onPress: calculateEMI),
+              const SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: Text(
+                  'Rs. ${emi.toStringAsFixed(2)}/mo',
+                  style: const TextStyle(
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
+                      color: kGreenColor),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

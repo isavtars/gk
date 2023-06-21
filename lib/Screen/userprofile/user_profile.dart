@@ -33,6 +33,8 @@ class UserProfile extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: sizev! * 3, left: sizeh! * 3, right: sizeh * 3),
             child: Column(
+
+              
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

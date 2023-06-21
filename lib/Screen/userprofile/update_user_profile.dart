@@ -254,13 +254,12 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                             hintText: reminderdropvalue,
                             // suffixIcon: Icons.keyboard_arrow_down,
                             suffix: DropdownButton<String>(
-                              elevation: 10,
-                              iconSize: 32,
+                              iconSize: 22,
                               style: kJakartaHeading4.copyWith(
                                   color: kGrayTextfieldC, fontSize: 19),
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.keyboard_arrow_down,
-                                color: kGrayTextfieldC,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                               items: items.map<DropdownMenuItem<String>>(
                                   (String value) {
@@ -269,7 +268,7 @@ class _UserProfileUpdateState extends State<UserProfileUpdate> {
                                   child: Text(
                                     value,
                                     style: kJakartaHeading3.copyWith(
-                                        fontSize: 19, color: kGrayTextfieldC),
+                                        fontSize: 19, color: kGreenColor),
                                   ),
                                 );
                               }).toList(),

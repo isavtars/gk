@@ -18,69 +18,79 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text(usercontroller.uid),
-            accountEmail: Text(usercontroller.email),
-            decoration: const BoxDecoration(color: kGreenColor),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: kGreenColor,
-              backgroundImage: NetworkImage(usercontroller.profilePic),
+    return Scaffold(
+      body: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text(usercontroller.uid),
+              accountEmail: Text(usercontroller.email),
+              decoration: const BoxDecoration(color: kGreenColor),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: kGreenColor,
+                backgroundImage: NetworkImage(usercontroller.profilePic),
+              ),
             ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () {
-              Get.to(const HomeScreen());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.account_balance_wallet),
-            title: const Text('Wallet'),
-            onTap: () {
-              Get.to(const WalletScreen());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.article),
-            title: const Text('Planning'),
-            onTap: () {
-              Get.to(const PlanningScreeen());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Profile'),
-            onTap: () {
-              Get.to(const UserProfile());
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.calculate),
-            title: const Text('Calculate EMI'),
-            onTap: () {
-              Get.to(EMICalculator());
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.logout,
-              color: Colors.red,
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Get.to(const HomeScreen());
+              },
             ),
-            title: const Text(
-              'LOGOUT',
-              style: TextStyle(color: Colors.red),
+            ListTile(
+              leading: const Icon(
+                Icons.account_balance_wallet,
+                color: kGreenColor,
+              ),
+              title: const Text('Wallet'),
+              onTap: () {
+                Get.to(const WalletScreen());
+              },
             ),
-            onTap: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
-            },
-          ),
-        ],
+            ListTile(
+              leading: const Icon(Icons.article),
+              title: const Text('Planning'),
+              onTap: () {
+                Get.to(const PlanningScreeen());
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.person,
+                color: kGreenColor,
+              ),
+              title: const Text('Profile'),
+              onTap: () {
+                Get.to(const UserProfile());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.calculate),
+              title: const Text('Calculate EMI'),
+              onTap: () {
+                Get.to(EMICalculator());
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.logout,
+                color: Colors.red,
+              ),
+              title: const Text(
+                'LOGOUT',
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()));
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
