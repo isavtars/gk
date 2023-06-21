@@ -45,10 +45,12 @@ class DrawerWidget extends StatelessWidget {
                   Get.to(const HomeScreen());
                 },
               ),
-              const ListTile(
-                title: Text('Management'),
+              const SizedBox(
+                height: 5,
               ),
-              const Divider(),
+              const TitleWithDrawer(
+                title: "Management",
+              ),
               ListTile(
                 leading: const Icon(
                   Icons.home,
@@ -82,7 +84,10 @@ class DrawerWidget extends StatelessWidget {
 
               //calculatedemi
               ListTile(
-                leading: const Icon(Icons.calculate),
+                leading: const Icon(
+                  Icons.calculate,
+                  color: kKarobarcolor,
+                ),
                 title: const Text('Calculate EMI'),
                 onTap: () {
                   Get.to(EMICalculator());
@@ -109,10 +114,12 @@ class DrawerWidget extends StatelessWidget {
                   Get.to(const IncomeExpenses());
                 },
               ),
+              const SizedBox(
+                height: 5,
+              ),
 
-              const Divider(),
-              const ListTile(
-                title: Text('System'),
+              const TitleWithDrawer(
+                title: "System",
               ),
               //logout
 
@@ -148,6 +155,38 @@ class DrawerWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TitleWithDrawer extends StatelessWidget {
+  const TitleWithDrawer({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 13.0),
+              child: Text(
+                title,
+                style: kJakartaBodyBold.copyWith(
+                    fontSize: 16, fontWeight: FontWeight.w400),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Divider()
+          ]),
     );
   }
 }
