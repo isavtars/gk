@@ -23,7 +23,7 @@ class _EMICalculatorState extends State<EMICalculator> {
       backgroundColor: kGreenColor,
       appBar: AppBar(
         title: const Text('EMI Calculator'),
-        backgroundColor: kGreenColor,
+        backgroundColor: kKarobarcolor,
         elevation: 0,
       ),
       body: SingleChildScrollView(

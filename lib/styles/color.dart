@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const kGreenColor = Color(0xff00968A);
+const kKarobarcolor = Color(0xff00B98D);
+
+const kGreenColor = Color(0xff00B98D);
 const kTextFieldColor = Color.fromARGB(255, 157, 162, 167);
 const kTextFieldBorderC = Color.fromARGB(255, 128, 131, 136);
 const kFontBlackC = Color(0xff353535);
