@@ -9,6 +9,7 @@ import '../../styles/gharkharcha_themes.dart';
 import '../auth/login.dart';
 import '../widgets/custom_buttons.dart';
 import '../widgets/custom_cards.dart';
+import '../widgets/drawer.dart';
 import '../widgets/null_errors.dart';
 import 'addfunds.dart';
 // import 'transcard_models.dart';
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
     // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
+        drawer: DrawerWidget(),
         body: StreamBuilder(
             stream: firestore
                 .collection('usersdata')

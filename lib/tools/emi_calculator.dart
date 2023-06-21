@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gk/Screen/widgets/custom_buttons.dart';
 import 'package:gk/Screen/widgets/custom_inputs.dart';
-import 'package:gk/Screen/widgets/drawer.dart';
+
 import 'package:gk/styles/color.dart';
 
 class EMICalculator extends StatefulWidget {
@@ -24,8 +24,8 @@ class _EMICalculatorState extends State<EMICalculator> {
       appBar: AppBar(
         title: const Text('EMI Calculator'),
         backgroundColor: kGreenColor,
+        elevation: 0,
       ),
-      drawer: DrawerWidget(),
       body: SingleChildScrollView(
         child: Container(
           color: Theme.of(context).cardColor,
