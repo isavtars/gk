@@ -37,7 +37,7 @@ class Dashboard extends StatelessWidget {
               children: [
                 Container(
                   color: kKarobarcolor,
-                  child: const Text("REminder"),
+                  child: const Text("Reminder"),
                 )
               ],
             ));
