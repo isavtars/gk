@@ -3,7 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'Screen/Home/home_screen.dart';
+import 'Screen/Bugets/buget_home_screen.dart';
+import 'Screen/Dashboard/dashboard_home.dart';
 import 'Screen/auth/forgot_password_screen.dart';
 import 'Screen/auth/login.dart';
 import 'Screen/auth/register_screen.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
                   debugPrint("${snapshot.hasData}hello this the data");
                   // if snapshot has data which means user is logged in then we check the width
                   // of screen and accordingly display the screen layout
-                  return const BottomNav();
+                  return const Dashboard();
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text('${snapshot.error}'),
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
               return const LoginScreen();
             },
           ),
+          // home: const Dashboard(),
         );
       },
     );

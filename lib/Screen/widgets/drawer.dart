@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gk/Screen/Home/home_screen.dart';
+import 'package:gk/Screen/Bugets/buget_home_screen.dart';
 import 'package:gk/Screen/auth/login.dart';
 import 'package:gk/Screen/planning/planning.dart';
 import 'package:gk/Screen/userprofile/user_profile.dart';
@@ -13,11 +13,17 @@ import 'package:gk/tools/emi_calculator.dart';
 import '../../model/drawer_entry.dart';
 import '../../tools/inc/exp/incomeexp.dart';
 
-class DrawerWidget extends StatelessWidget {
-  final usercontroller = Get.find<UserController>().getUsers!;
+class DrawerWidget extends StatefulWidget {
   DrawerWidget({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  final usercontroller = Get.find<UserController>().getUsers!;
 
   @override
   Widget build(BuildContext context) {

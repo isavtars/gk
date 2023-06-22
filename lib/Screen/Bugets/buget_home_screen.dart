@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
     // final FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
-        drawer: DrawerWidget(),
+       
         body: StreamBuilder(
             stream: firestore
                 .collection('usersdata')

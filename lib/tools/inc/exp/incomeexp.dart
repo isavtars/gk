@@ -77,10 +77,13 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           prices(prices: "10,000"),
+                          const SizedBox(
+                            height: 3,
+                          ),
                           Text(
                             "Income",
                             style: kJakartaBodyMedium.copyWith(
-                                fontSize: 15, fontWeight: FontWeight.w500),
+                                fontSize: 14, fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -88,11 +91,14 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          prices(prices: "10,000"),
+                          prices(prices: "10,000", isExpenses: true),
+                          const SizedBox(
+                            height: 3,
+                          ),
                           Text(
                             "Expensess",
                             style: kJakartaBodyMedium.copyWith(
-                                fontSize: 15, fontWeight: FontWeight.w500),
+                                fontSize: 14, fontWeight: FontWeight.w500),
                           )
                         ],
                       ),
@@ -101,9 +107,12 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           prices(prices: "10,000"),
+                          const SizedBox(
+                            height: 3,
+                          ),
                           Text("Net amount",
                               style: kJakartaBodyMedium.copyWith(
-                                  fontSize: 15, fontWeight: FontWeight.w500))
+                                  fontSize: 14, fontWeight: FontWeight.w500))
                         ],
                       )
                     ]),
@@ -193,7 +202,7 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
                       ),
 
                       AspectRatio(
-                          aspectRatio: 1.1,
+                          aspectRatio: 1,
                           child: Image.asset("assets/images/addTrans.png"))
                     ]),
               )
@@ -246,18 +255,22 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
     );
   }
 
-  Row prices({required String prices}) {
+  Row prices({required String prices, bool isExpenses = false}) {
     return Row(
       children: [
         Text(
           "Rs.",
           style: kJakartaBodyMedium.copyWith(
-              color: kKarobarcolor, fontSize: 15, fontWeight: FontWeight.w500),
+              color: isExpenses ? Colors.red : kKarobarcolor,
+              fontSize: 15,
+              fontWeight: FontWeight.w500),
         ),
         Text(
           prices,
           style: kJakartaBodyMedium.copyWith(
-              color: kKarobarcolor, fontSize: 15, fontWeight: FontWeight.w500),
+              color: isExpenses ? Colors.red : kKarobarcolor,
+              fontSize: 15,
+              fontWeight: FontWeight.w500),
         ),
       ],
     );
