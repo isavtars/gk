@@ -192,6 +192,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
               ListTile(
                 leading: const Icon(
+                  Icons.settings,
+                  color: kGreenColor,
+                ),
+                title: const Text('All Settings'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
                   Icons.logout,
                   color: Colors.red,
                 ),
