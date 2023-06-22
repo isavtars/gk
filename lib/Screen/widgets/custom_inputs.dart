@@ -35,6 +35,7 @@ class CustomeInputs extends StatelessWidget {
         cursorColor: Theme.of(context).primaryColor,
         keyboardType: textinputTypes,
         decoration: InputDecoration(
+          
             hintStyle: const TextStyle(color: kGrayC, fontSize: 16),
             prefixIcon: Icon(
               icons,
@@ -43,7 +44,7 @@ class CustomeInputs extends StatelessWidget {
             ),
             hintText: hintText,
             hoverColor: kGreenColor,
-            focusColor: kTextFieldColor,
+            focusColor: kKarobarcolor,
             filled: true,
             enabledBorder: Theme.of(context).inputDecorationTheme.enabledBorder,
             focusedBorder:

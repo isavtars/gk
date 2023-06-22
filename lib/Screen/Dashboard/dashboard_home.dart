@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../styles/color.dart';
 
 // import 'transcard_models.dart';
