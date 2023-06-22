@@ -33,8 +33,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           child: Column(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName: Text(usercontroller.uid),
-                accountEmail: Text(usercontroller.email),
+                accountName: Text(usercontroller.fullName, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                accountEmail: Text(usercontroller.email, style: const TextStyle(color: Colors.white),),
                 decoration: const BoxDecoration(color: kKarobarcolor),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: kKarobarcolor,
