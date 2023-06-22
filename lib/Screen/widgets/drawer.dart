@@ -14,7 +14,7 @@ import '../../model/drawer_entry.dart';
 import '../../tools/inc/exp/incomeexp.dart';
 
 class DrawerWidget extends StatefulWidget {
-  DrawerWidget({
+  const DrawerWidget({
     Key? key,
   }) : super(key: key);
 
@@ -96,7 +96,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 title: const Text('Calculate EMI'),
                 onTap: () {
-                  Get.to(EMICalculator());
+                  Get.to(const EMICalculator());
                 },
               ),
 
@@ -199,7 +199,7 @@ class TitleWithDrawer extends StatelessWidget {
 
 //for the
 class EntryItem extends StatelessWidget {
-  const EntryItem(this.entry);
+  const EntryItem(this.entry, {super.key});
 
   final Entry entry;
 

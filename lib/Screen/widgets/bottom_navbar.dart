@@ -81,7 +81,7 @@ class _BottomNavState extends State<BottomNav> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              drawer: DrawerWidget(),
+              drawer: const DrawerWidget(),
               body: PersistentTabView(
                 context,
                 screens: _buildScreen(),
