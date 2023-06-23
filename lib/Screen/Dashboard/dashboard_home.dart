@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/rendering.dart';
-
+import 'package:get/get.dart';
+import '../../logic/user_controller.dart';
 import '../../styles/color.dart';
-import '../../styles/gharkharcha_themes.dart';
-import '../Bugets/addfunds.dart';
-
-// import 'transcard_models.dart';
-import 'package:intl/intl.dart';
-
 import '../widgets/drawer.dart';
 
-//homepages
-class Dashboard extends StatelessWidget {
+//homepage/dashboard
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
+  void initState() {
+    addData();
+    super.initState();
+  }
+
+  void addData() async {
+    final usercontroller = Get.find<UserController>();
+    await usercontroller.refressUser();
+  }
 
   @override
   Widget build(BuildContext context) {

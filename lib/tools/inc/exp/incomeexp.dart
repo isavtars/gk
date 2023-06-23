@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gk/styles/color.dart';
 
+import 'Components/expenss_screen.dart';
+import 'Components/income_add_screen.dart';
+
 enum Dcolor { expenses, income, netamount }
 
 class IncomeExpenses extends StatefulWidget {
@@ -178,18 +181,20 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
                                 children: [
                                   Text("Recharges",
                                       style: kJakartaBodyBold.copyWith(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600)),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700)),
                                   const SizedBox(
                                     height: 8,
                                   ),
                                   Text("Remarks",
-                                      style: kJakartaBodyBold.copyWith()),
+                                      style: kJakartaBodyBold.copyWith(
+                                          fontSize: 14)),
                                   const SizedBox(
                                     height: 8,
                                   ),
                                   Text("FEatchDate",
-                                      style: kJakartaBodyBold.copyWith())
+                                      style: kJakartaBodyBold.copyWith(
+                                          fontSize: 14))
                                 ]),
                             //RightSide
 
@@ -210,6 +215,7 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
           ),
         );
       })),
+      bottomSheet: const BottomSheet(),
     );
   }
 
@@ -273,6 +279,80 @@ class _IncomeExpensesState extends State<IncomeExpenses> {
               fontWeight: FontWeight.w500),
         ),
       ],
+    );
+  }
+}
+
+class BottomSheet extends StatelessWidget {
+  const BottomSheet({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(10),
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        //income
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const IncomeADD()));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            height: 50,
+            width: 150,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: kKarobarcolor),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              Text(
+                "Income",
+                style: kjakartaHeading2.copyWith(
+                    fontSize: 14, color: Colors.white),
+              )
+            ]),
+          ),
+        ),
+
+        const SizedBox(
+          width: 20,
+        ),
+        //expenses
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ExpensessReduce()));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            height: 50,
+            width: 150,
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                color: Color.fromARGB(255, 218, 50, 38)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Icon(
+                Icons.remove,
+                color: Colors.white,
+              ),
+              Text(
+                "Expencess",
+                style: kjakartaHeading2.copyWith(
+                    fontSize: 14, color: Colors.white),
+              )
+            ]),
+          ),
+        )
+      ]),
     );
   }
 }

@@ -9,7 +9,7 @@ import 'Screen/auth/forgot_password_screen.dart';
 import 'Screen/auth/login.dart';
 import 'Screen/auth/register_screen.dart';
 import 'Screen/splash_screen.dart';
-import 'Screen/widgets/bottom_navbar.dart';
+
 import 'firebase_options.dart';
 import 'logic/bainding/my_bainding.dart';
 import 'logic/themes_changer.dart';
@@ -74,7 +74,6 @@ class MyApp extends StatelessWidget {
               return const LoginScreen();
             },
           ),
-          // home: const Dashboard(),
         );
       },
     );
