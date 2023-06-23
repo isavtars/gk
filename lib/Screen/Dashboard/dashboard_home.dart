@@ -28,7 +28,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kKarobarcolor,
-      drawer: DrawerWidget(),
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         backgroundColor: kKarobarcolor,
         elevation: 0,
@@ -50,7 +50,7 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 Container(
                   color: kKarobarcolor,
-                  child: const Text("REminder"),
+                  child: const Text("Reminder"),
                 )
               ],
             ));

@@ -14,7 +14,7 @@ import '../../model/drawer_entry.dart';
 import '../../tools/inc/exp/incomeexp.dart';
 
 class DrawerWidget extends StatefulWidget {
-  DrawerWidget({
+  const DrawerWidget({
     Key? key,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  final usercontroller = Get.find<UserController>().getUsers!;
+  // final usercontroller = Get.find<UserController>().getUsers!;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,23 @@ class _DrawerWidgetState extends State<DrawerWidget> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text(usercontroller.uid),
-                accountEmail: Text(usercontroller.email),
-                decoration: const BoxDecoration(color: kKarobarcolor),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: kKarobarcolor,
-                  backgroundImage: NetworkImage(usercontroller.profilePic),
+              const UserAccountsDrawerHeader(
+                accountName: Text(
+                  'usercontroller.fullName',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                accountEmail: Text(
+                  'usercontroller.email',
+                  style: TextStyle(color: Colors.white),
+                ),
+                decoration: BoxDecoration(color: kKarobarcolor),
+                currentAccountPicture: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    backgroundColor: kKarobarcolor,
+                    // backgroundImage: NetworkImage('usercontroller.profilePic'),
+                  ),
                 ),
               ),
               ListTile(
@@ -47,15 +57,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   color: kGreenColor,
                 ),
                 title: const Text('Your Status'),
-                onTap: () {
-                  Get.to(const HomeScreen());
-                },
+                onTap: () {},
               ),
               const SizedBox(
                 height: 5,
               ),
               const TitleWithDrawer(
-                title: "Management",
+                title: "MANAGEMENT",
               ),
               ListTile(
                 leading: const Icon(
@@ -96,7 +104,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 title: const Text('Calculate EMI'),
                 onTap: () {
-                  Get.to(EMICalculator());
+                  Get.to(const EMICalculator());
                 },
               ),
 
@@ -115,17 +123,61 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.wallet,
                   color: kGreenColor,
                 ),
-                title: const Text('income/expenses'),
-                onTap: () {
-                  Get.to(const IncomeExpenses());
-                },
+                title: const Text('Income/Expenses'),
+                onTap: () {},
               ),
               const SizedBox(
                 height: 5,
               ),
 
               const TitleWithDrawer(
-                title: "System",
+                title: "HELP & SUPPORT",
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.announcement,
+                  color: kGreenColor,
+                ),
+                title: const Text('Notices'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.contact_emergency,
+                  color: kGreenColor,
+                ),
+                title: const Text('Contact us'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.help,
+                  color: kGreenColor,
+                ),
+                title: const Text('Learn to use'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.star,
+                  color: kGreenColor,
+                ),
+                title: const Text('Rate this app'),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.share,
+                  color: kGreenColor,
+                ),
+                title: const Text('Share this app'),
+                onTap: () {},
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const TitleWithDrawer(
+                title: "SYSTEM",
               ),
               //logout
 
@@ -136,9 +188,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   color: kGreenColor,
                 ),
                 title: const Text('Profile'),
-                onTap: () {
-                  Get.to(const UserProfile());
-                },
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.settings,
+                  color: kGreenColor,
+                ),
+                title: const Text('All Settings'),
+                onTap: () {},
               ),
               ListTile(
                 leading: const Icon(
@@ -150,11 +208,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   style: TextStyle(color: Colors.red),
                 ),
                 onTap: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()));
+                  _showLogoutConfirmationDialog(context);
                 },
               ),
             ],
@@ -175,37 +229,37 @@ class TitleWithDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 13.0),
-              child: Text(
-                title,
-                style: kJakartaBodyBold.copyWith(
-                    fontSize: 16, fontWeight: FontWeight.w400),
-              ),
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 13.0),
+            child: Text(
+              title,
+              style: kJakartaBodyBold.copyWith(
+                  fontSize: 16, fontWeight: FontWeight.w400),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Divider()
-          ]),
-    );
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const Divider()
+        ]);
   }
 }
 
 //for the
 class EntryItem extends StatelessWidget {
-  const EntryItem(this.entry);
+  const EntryItem(this.entry, {super.key});
 
   final Entry entry;
 
   Widget _buildTiles(Entry root) {
     if (root.children.isEmpty) return ListTile(title: Text(root.title));
     return ExpansionTile(
+      iconColor: kKarobarcolor,
+      textColor: kKarobarcolor,
       key: PageStorageKey<Entry>(root),
       title: Text(root.title),
       children: root.children.map(_buildTiles).toList(),
@@ -216,4 +270,41 @@ class EntryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _buildTiles(entry);
   }
+}
+
+void _showLogoutConfirmationDialog(BuildContext context) {
+  Navigator.pop(context);
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Confirm Logout'),
+        content: const Text('Are you sure you want to logout?'),
+        actions: [
+          TextButton(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: kKarobarcolor),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+          TextButton(
+            child: const Text(
+              'Logout',
+              style: TextStyle(color: Colors.red),
+            ),
+            onPressed: () {
+              // Perform logout operation here
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

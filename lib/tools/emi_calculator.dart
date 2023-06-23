@@ -7,6 +7,8 @@ import 'package:gk/Screen/widgets/custom_inputs.dart';
 import 'package:gk/styles/color.dart';
 
 class EMICalculator extends StatefulWidget {
+  const EMICalculator({super.key});
+
   @override
   _EMICalculatorState createState() => _EMICalculatorState();
 }
